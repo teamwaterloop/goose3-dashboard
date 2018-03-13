@@ -10,6 +10,7 @@ UDP_PORT = 12345
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server = (UDP_IP, UDP_PORT)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 #s.bind(server)
 #s.listen(1)
 #connection, client = s.accept()
