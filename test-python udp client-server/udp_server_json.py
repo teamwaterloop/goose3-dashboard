@@ -3,17 +3,21 @@ import sys
 import socket
 from datetime import datetime
 import time
-
-UDP_IP = "localhost"
-UDP_PORT = 12345
+import struct
 
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+UDP_IP = "224.1.1.1"
+UDP_PORT = 5007
+
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+s.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 10)
+
 server = (UDP_IP, UDP_PORT)
-s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-s.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 2)
-#s.bind(server)
+#s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+#s.bind((ANY, UDP_PORT))
+#mreq = struct.pack("4sl", socket.inet_aton(UDP_IP), socket.)
+#s.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 #s.listen(1)
 #connection, client = s.accept()
 
