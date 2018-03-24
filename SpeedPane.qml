@@ -40,7 +40,6 @@ Rectangle {
         width: root.width - (2 * lineMarginSize)
     }
 
-    // TODO: display speed, max speed, and acceleration here
     Rectangle {
         id: topSection
         anchors.top: parent.top
@@ -60,7 +59,7 @@ Rectangle {
         DataLabel {
             id: accelerationLabel
             anchors.right: parent.right
-            anchors.rightMargin: 10
+            anchors.rightMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             dataText: '18.3'
@@ -72,7 +71,7 @@ Rectangle {
         DataLabel {
             id: maxSpeedLabel
             anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.leftMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             dataText: '243'
