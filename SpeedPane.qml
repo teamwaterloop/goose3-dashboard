@@ -20,24 +20,69 @@ Rectangle {
 
     // draw separating lines
     SeparatingLine {
+        id: line1
         x: lineMarginSize
         y: 170 / intendedRootHeight * root.height
         length: root.width - (2 * lineMarginSize)
     }
 
     SeparatingLine {
+        id: line2
         x: lineMarginSize
         y: 668 / intendedRootHeight * root.height
         width: root.width - (2 * lineMarginSize)
     }
 
     SeparatingLine {
+        id: line3
         x: lineMarginSize
         y: 940 / intendedRootHeight * root.height
         width: root.width - (2 * lineMarginSize)
     }
 
     // TODO: display speed, max speed, and acceleration here
+    Rectangle {
+        id: topSection
+        anchors.top: parent.top
+        anchors.left: line1.left
+        anchors.right: line1.right
+        anchors.bottom: line1.top
+        color: root.color
+
+        DataLabel {
+            id: speedLabel
+            anchors.horizontalCenter: parent.horizontalCenter
+            dataText: '197'
+            labelText: 'kph'
+            size: 64
+        }
+
+        DataLabel {
+            id: accelerationLabel
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            dataText: '18.3'
+            labelText: 'm/s²'
+            labelSize: 12
+            size: 32
+        }
+
+        DataLabel {
+            id: maxSpeedLabel
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            dataText: '243'
+            labelText: 'max speed'
+            labelSize: 12
+            size: 32
+        }
+
+
+    }
 
     // TODO: create sub-components for yaw, pitch and roll dials here
 

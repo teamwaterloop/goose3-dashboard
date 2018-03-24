@@ -9,4 +9,6 @@ Rectangle {
 
     height: lineThickness
     color: lineColor
+
+    z: 100
 }
