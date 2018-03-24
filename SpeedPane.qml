@@ -8,9 +8,34 @@ import QtQuick 2.0
 
 Rectangle {
     id: root
-    width: 550
-    height: 960
     color: "#4A4A4A"
+
+    // design coordinates; lets us use relative positioning
+    property int intendedRootWidth: 550;
+    property int intendedRootHeight: 960;
+
+    property int lineMarginSize: 30
+    property int lineThickness: 2
+    property color lineColor: "#9B9B9B"
+
+    // draw separating lines
+    SeparatingLine {
+        x: lineMarginSize
+        y: 170 / intendedRootHeight * root.height
+        length: root.width - (2 * lineMarginSize)
+    }
+
+    SeparatingLine {
+        x: lineMarginSize
+        y: 668 / intendedRootHeight * root.height
+        width: root.width - (2 * lineMarginSize)
+    }
+
+    SeparatingLine {
+        x: lineMarginSize
+        y: 940 / intendedRootHeight * root.height
+        width: root.width - (2 * lineMarginSize)
+    }
 
     // TODO: display speed, max speed, and acceleration here
 

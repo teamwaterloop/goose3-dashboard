@@ -10,6 +10,14 @@ Rectangle {
     id: root
     color: "#4A4A4A"
 
+    property int intendedHeight: 960
+
+    SeparatingLine {
+        x: lineMarginSize
+        y: 750 / intendedHeight * root.height
+        length: root.width - 2 * lineMarginSize
+    }
+
     /**
       TODO: Display Propolusion Summary Stats
         1. Distance in tube

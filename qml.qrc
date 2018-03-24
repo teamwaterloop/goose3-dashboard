@@ -4,5 +4,6 @@
         <file>SpeedPane.qml</file>
         <file>SummaryPane.qml</file>
         <file>DistancePane.qml</file>
+        <file>SeparatingLine.qml</file>
     </qresource>
 </RCC>
