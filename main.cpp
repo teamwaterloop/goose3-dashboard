@@ -1,3 +1,9 @@
+/**
+  Author: Jashan S. Shewakramani
+  Description: Main QML Application.
+  Simply sets up different components for execution.
+  */
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 

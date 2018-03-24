@@ -1,5 +1,8 @@
 <RCC>
-    <qresource prefix="/main">
+    <qresource prefix="/">
         <file>main.qml</file>
+        <file>SpeedPane.qml</file>
+        <file>SummaryPane.qml</file>
+        <file>DistancePane.qml</file>
     </qresource>
 </RCC>
