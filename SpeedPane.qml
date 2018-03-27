@@ -99,11 +99,11 @@ Rectangle {
         anchors.top: line2.bottom
         anchors.right: line2.right
         anchors.bottom: line3.top
-        Layout.alignment: Qt.AlignHCenter
+        Layout.alignment: Qt.AlignVCenter
 
         ColumnLayout {
             id: bottomSection1
-            Layout.alignment: Qt.AlignVCenter
+            Layout.alignment: Qt.AlignHCenter
 
             DataLabel {
                 subLabelOnTop: true
@@ -138,7 +138,7 @@ Rectangle {
 
         ColumnLayout {
             id: bottomSection2
-            Layout.alignment: Qt.AlignVCenter
+            Layout.alignment: Qt.AlignHCenter
 
             Rectangle {
                 id: stopButton
