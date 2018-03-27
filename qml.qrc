@@ -6,5 +6,6 @@
         <file>DistancePane.qml</file>
         <file>SeparatingLine.qml</file>
         <file>DataLabel.qml</file>
+        <file>Label.qml</file>
     </qresource>
 </RCC>
