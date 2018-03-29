@@ -220,15 +220,15 @@ Makefile: ../Qt-client/Qt-client.pro D:/Qt/5.10.1/mingw53_32/mkspecs/win32-g++/q
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/resolve_config.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/exclusive_builds_post.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/default_post.prf \
-		D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/console.prf \
-		D:/Qt/5.10.1/mingw53_32/mkspecs/features/qml_debug.prf \
-		D:/Qt/5.10.1/mingw53_32/mkspecs/features/precompile_header.prf \
-		D:/Qt/5.10.1/mingw53_32/mkspecs/features/warn_on.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/qt.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/resources.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/moc.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/opengl.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/uic.prf \
+		D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/console.prf \
+		D:/Qt/5.10.1/mingw53_32/mkspecs/features/qml_debug.prf \
+		D:/Qt/5.10.1/mingw53_32/mkspecs/features/precompile_header.prf \
+		D:/Qt/5.10.1/mingw53_32/mkspecs/features/warn_on.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/qmake_use.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/file_copies.prf \
 		D:/Qt/5.10.1/mingw53_32/mkspecs/features/testcase_targets.prf \
@@ -400,15 +400,15 @@ D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/default_pre.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/resolve_config.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/exclusive_builds_post.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/default_post.prf:
-D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/console.prf:
-D:/Qt/5.10.1/mingw53_32/mkspecs/features/qml_debug.prf:
-D:/Qt/5.10.1/mingw53_32/mkspecs/features/precompile_header.prf:
-D:/Qt/5.10.1/mingw53_32/mkspecs/features/warn_on.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/qt.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/resources.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/moc.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/opengl.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/uic.prf:
+D:/Qt/5.10.1/mingw53_32/mkspecs/features/win32/console.prf:
+D:/Qt/5.10.1/mingw53_32/mkspecs/features/qml_debug.prf:
+D:/Qt/5.10.1/mingw53_32/mkspecs/features/precompile_header.prf:
+D:/Qt/5.10.1/mingw53_32/mkspecs/features/warn_on.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/qmake_use.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/file_copies.prf:
 D:/Qt/5.10.1/mingw53_32/mkspecs/features/testcase_targets.prf:
