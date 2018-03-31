@@ -17,9 +17,11 @@ public slots:
     void readyRead();
 
 
+
 private:
     QHostAddress tcpaddress;
     QTcpSocket *tcpsocket;
+    void sendCommand();
 };
 
 #endif // MYTCP_H
