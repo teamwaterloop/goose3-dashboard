@@ -12,7 +12,7 @@ MyUDP::MyUDP (QObject *parent) : QObject(parent)
     //Q_ASSERT(udpsocket->joinMulticastGroup(QHostAddress::LocalHost));
 
     connect (udpsocket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    Q_ASSERT(udpsocket->bind(QHostAddress::LocalHost, 15200));
+    Q_ASSERT(udpsocket->bind(QHostAddress::LocalHost, 65000));
 }
 
 void MyUDP::readyRead()

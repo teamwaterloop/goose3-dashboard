@@ -51,10 +51,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Qt-client/main.cpp \
-		../Qt-client/myudp.cpp moc_myudp.cpp
+		../Qt-client/myudp.cpp \
+		../Qt-client/mytcp.cpp moc_myudp.cpp \
+		moc_mytcp.cpp
 OBJECTS       = main.o \
 		myudp.o \
-		moc_myudp.o
+		mytcp.o \
+		moc_myudp.o \
+		moc_mytcp.o
 DIST          = ../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/qdevice.pri \
 		../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/device_config.prf \
@@ -241,8 +245,10 @@ DIST          = ../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/spec_pre
 		../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/exceptions.prf \
 		../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/yacc.prf \
 		../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/lex.prf \
-		../Qt-client/Qt-client.pro ../Qt-client/myudp.h ../Qt-client/main.cpp \
-		../Qt-client/myudp.cpp
+		../Qt-client/Qt-client.pro ../Qt-client/myudp.h \
+		../Qt-client/mytcp.h ../Qt-client/main.cpp \
+		../Qt-client/myudp.cpp \
+		../Qt-client/mytcp.cpp
 QMAKE_TARGET  = Qt-client
 DESTDIR       = 
 TARGET        = Qt-client
@@ -657,8 +663,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt-client/myudp.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Qt-client/main.cpp ../Qt-client/myudp.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt-client/myudp.h ../Qt-client/mytcp.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Qt-client/main.cpp ../Qt-client/myudp.cpp ../Qt-client/mytcp.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -690,9 +696,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk -mmacosx-version-min=10.10 -dM -E -o moc_predefs.h ../../../../Desktop/Qt/5.10.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_myudp.cpp
+compiler_moc_header_make_all: moc_myudp.cpp moc_mytcp.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_myudp.cpp
+	-$(DEL_FILE) moc_myudp.cpp moc_mytcp.cpp
 moc_myudp.cpp: ../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QUdpSocket \
@@ -703,6 +709,17 @@ moc_myudp.cpp: ../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Heade
 		moc_predefs.h \
 		../../../../Desktop/Qt/5.10.0/clang_64/bin/moc
 	/Users/Ash/Desktop/Qt/5.10.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/mkspecs/macx-clang -I/Users/Ash/Documents/GitHub/goose-dashboard/Qt-client -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtGui.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib ../Qt-client/myudp.h -o moc_myudp.cpp
+
+moc_mytcp.cpp: ../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QHostAddress \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
+		../Qt-client/mytcp.h \
+		moc_predefs.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/bin/moc
+	/Users/Ash/Desktop/Qt/5.10.0/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/mkspecs/macx-clang -I/Users/Ash/Documents/GitHub/goose-dashboard/Qt-client -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtGui.framework/Headers -I/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include -F/Users/Ash/Desktop/Qt/5.10.0/clang_64/lib ../Qt-client/mytcp.h -o moc_mytcp.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -771,7 +788,11 @@ main.o: ../Qt-client/main.cpp ../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QTime
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QTime \
+		../Qt-client/myudp.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QHostAddress
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Qt-client/main.cpp
 
 myudp.o: ../Qt-client/myudp.cpp ../Qt-client/myudp.h \
@@ -783,8 +804,20 @@ myudp.o: ../Qt-client/myudp.cpp ../Qt-client/myudp.h \
 		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o myudp.o ../Qt-client/myudp.cpp
 
+mytcp.o: ../Qt-client/mytcp.cpp ../Qt-client/mytcp.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QHostAddress \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../../../Desktop/Qt/5.10.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mytcp.o ../Qt-client/mytcp.cpp
+
 moc_myudp.o: moc_myudp.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_myudp.o moc_myudp.cpp
+
+moc_mytcp.o: moc_mytcp.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mytcp.o moc_mytcp.cpp
 
 ####### Install
 

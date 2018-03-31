@@ -14,7 +14,9 @@ MyTCP::MyTCP (QObject *parent) : QObject(parent)
 }
 
 MyTCP::readyRead() {
-
+    QByteArray response;
+    response.resize(10);
+    response = tcpsocket->readAll();
 }
 
 MyTCP::sendCommand() {

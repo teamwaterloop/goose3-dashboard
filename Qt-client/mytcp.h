@@ -14,6 +14,8 @@ public:
 signals:
 
 public slots:
+    void readyRead();
+
 
 private:
     QHostAddress tcpaddress;
