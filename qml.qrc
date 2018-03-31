@@ -7,5 +7,6 @@
         <file>SeparatingLine.qml</file>
         <file>DataLabel.qml</file>
         <file>Label.qml</file>
+        <file>BatteryFigure.qml</file>
     </qresource>
 </RCC>
