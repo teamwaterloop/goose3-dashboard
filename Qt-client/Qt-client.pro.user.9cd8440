@@ -3,6 +3,7 @@
 <!-- Written by QtCreator 4.6.0, 2018-03-29T04:12:51. -->
 <qtcreator>
  <data>
+  <variable>EnvironmentId</variable>
   <value type="QByteArray">{9cd8440a-7db0-47f7-8dc5-fdbc14e41d14}</value>
  </data>
  <data>

@@ -6,7 +6,7 @@ import time
 import struct
 
 
-UDP_IP = "224.1.1.1"
+UDP_IP = "localhost"
 UDP_PORT = 5007
 
 
