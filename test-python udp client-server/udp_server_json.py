@@ -7,7 +7,7 @@ import struct
 
 
 UDP_IP = "localhost"
-UDP_PORT = 45464
+UDP_PORT = 15200
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
