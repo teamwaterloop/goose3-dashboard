@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QTime>
 #include "myudp.h"
+#include "mytcp.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,8 +28,10 @@ int main(int argc, char *argv[])
 //    qDebug()<< str << x<<"lalalaa";
 
     QCoreApplication a(argc, argv);
-    MyUDP client;
-    client.readyRead();
+    MyUDP udpclient;
+    MyTCP tcpserver;
+    //udpclient.readyRead();
+    tcpserver.readyRead();
 
     return a.exec();
 }
