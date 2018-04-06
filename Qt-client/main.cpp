@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     MyUDP udpclient;
     MyTCP tcpserver;
-    //udpclient.readyRead();
-    tcpserver.readyRead();
+    udpclient.readyRead();
+    //tcpserver.readyRead();
 
     return a.exec();
 }

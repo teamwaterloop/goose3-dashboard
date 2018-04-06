@@ -4,7 +4,7 @@ MyUDP::MyUDP (QObject *parent) : QObject(parent)
 {
     //create socket
     udpsocket = new QUdpSocket(this);
-    udpaddress.setAddress("127.0.0.1");
+    udpaddress.setAddress("255.255.255.255");
 
     //bind socket to an address and port using bind()
     //udpsocket->bind(QHostAddress::LocalHost, 5007, QUdpSocket::ShareAddress);
@@ -12,7 +12,7 @@ MyUDP::MyUDP (QObject *parent) : QObject(parent)
     //Q_ASSERT(udpsocket->joinMulticastGroup(QHostAddress::LocalHost));
 
     connect (udpsocket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    Q_ASSERT(udpsocket->bind(QHostAddress::LocalHost, 65000));
+    Q_ASSERT(udpsocket->bind(QHostAddress::Any, 65000));
 }
 
 void MyUDP::readyRead()
