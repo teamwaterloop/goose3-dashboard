@@ -1,20 +1,16 @@
 #include <iostream>
 #include <QTextStream>
 #include <QTcpServer>
+#include <QDateTime>
 #include "mytcp.h"
 
 MyTCP::MyTCP (QObject *parent) : QObject(parent)
 {
     tcpsocket = new QTcpSocket(this);
-    connect(tcpsocket, SIGNAL(readyRead()), SLOT(sendCommand()));
-
-//    tcpsocket->connectToHost(tcpaddress, 15000);
-//    if (tcpsocket->waitForConnected()) {
-//        tcpsocket->write(data);
-//    }
+    tcpsocket->connectToHost(QHostAddress::LocalHost, 42002);
 }
 
-void MyTCP::readyRead() {
+void MyTCP::connectTCP() {
    QTcpServer server;
 
    if(!server.listen(tcpaddress, 15000)) return;

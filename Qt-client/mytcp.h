@@ -15,7 +15,7 @@ public:
 signals:
 
 public slots:
-    void readyRead();
+    void connectTCP();
     void sendCommand();
 
 
