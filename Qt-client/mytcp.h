@@ -11,17 +11,20 @@ class MyTCP : public QObject
     Q_OBJECT
 public:
     explicit MyTCP(QObject *parent = 0);
+    void sendCommand();
 
 signals:
 
 public slots:
-    void connectTCP();
-    void sendCommand();
+    void readyRead();
+    void readTCPData();
 
 
 private:
     QHostAddress tcpaddress;
     QTcpSocket *tcpsocket;
+
+
 };
 
 #endif // MYTCP_H

@@ -34,7 +34,12 @@ data = {
 #    print ("time: " + data['time'] + "\n")
 #    json_data = json.dumps(data, separators=(',',':'))
 #    connection.sendall(json_data.encode('utf-8'))
-
+while 1:
+    data = connection.recv(10)
+    print(str(data))
+    connection.sendall(b"Received")
+    if (data):
+        break
 
     
 s.close()

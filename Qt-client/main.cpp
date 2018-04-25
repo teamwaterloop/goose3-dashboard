@@ -3,8 +3,6 @@
 #include <QtNetwork>
 #include <QUdpSocket>
 #include <QTcpSocket>
-#include <QDateTime>
-#include <QTime>
 #include "myudp.h"
 #include "mytcp.h"
 
@@ -29,9 +27,10 @@ int main(int argc, char *argv[])
 
     QCoreApplication a(argc, argv);
     MyUDP udpclient;
-    MyTCP tcpserver;
+    MyTCP tcpclient;
     udpclient.readyRead();
-    //tcpserver.readyRead();
+    tcpclient.sendCommand();
+    tcpclient.readTCPData();
 
     return a.exec();
 }
