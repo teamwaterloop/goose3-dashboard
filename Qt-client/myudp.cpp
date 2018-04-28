@@ -43,9 +43,9 @@ bool MyUDP::jsonParse(QByteArray buffer) {
         qDebug() << "Type: " << jObj["type"].toString();
         qDebug() << "Name: " << jObj["name"].toInt();
         QJsonArray arr = jObj["data"].toArray();
-        qDebug() << "Data Sensor 1: " << arr[0]<<endl;
-        qDebug() << "Data Sensor 2: " << arr[1]<<endl;
-        qDebug() << "Data Sensor 3: " << arr[2]<<endl;
+        qDebug() << "Data Sensor 1: " << arr[0].toDouble();
+        qDebug() << "Data Sensor 2: " << arr[1].toDouble();
+        qDebug() << "Data Sensor 3: " << arr[2].toDouble()<<endl;
     }
 
     if (jerror.error != QJsonParseError::NoError) {
