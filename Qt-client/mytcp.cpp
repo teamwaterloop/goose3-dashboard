@@ -31,7 +31,4 @@ void MyTCP::sendCommand() {
     tcpsocket->write(command);
 
     qDebug() << "Message to Client: " << command;
-
-
 }
-

@@ -23,8 +23,6 @@ public slots:
 private:
     QHostAddress tcpaddress;
     QTcpSocket *tcpsocket;
-
-
 };
 
 #endif // MYTCP_H
