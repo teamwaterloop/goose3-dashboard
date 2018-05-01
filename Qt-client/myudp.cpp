@@ -1,18 +1,18 @@
 #include "myudp.h"
+#include <QJsonObject>
+#include <QJsonParseError>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 MyUDP::MyUDP (QObject *parent) : QObject(parent)
 {
     //create socket
     udpsocket = new QUdpSocket(this);
-    udpaddress.setAddress("127.0.0.1");
-
-    //bind socket to an address and port using bind()
-    //udpsocket->bind(QHostAddress::LocalHost, 5007, QUdpSocket::ShareAddress);
-
-    //Q_ASSERT(udpsocket->joinMulticastGroup(QHostAddress::LocalHost));
+    udpaddress.setAddress("255.255.255.255");
 
     connect (udpsocket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    Q_ASSERT(udpsocket->bind(QHostAddress::LocalHost, 65000));
+    Q_ASSERT(udpsocket->bind(QHostAddress::Any, 65000));
 }
 
 void MyUDP::readyRead()
@@ -28,6 +28,29 @@ void MyUDP::readyRead()
 
         qDebug() << "Message from: " << sender.toString();
         qDebug() << "Message port: " << senderPort;
-        qDebug() << "Message: " << buffer;
+        //qDebug() << "Message: " << buffer;
+        Q_ASSERT (!jsonParse(buffer));
+        //qWarning()<<"JSON parse failed. Skipping.";
+    }
+}
+
+bool MyUDP::jsonParse(QByteArray buffer) {
+    QJsonParseError jerror;
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(buffer);
+    if(!jsonResponse.isNull()) {
+        QJsonObject jObj = jsonResponse.object();
+        qDebug() << "Time: " << jObj["time"].toInt();
+        qDebug() << "Type: " << jObj["type"].toString();
+        qDebug() << "Name: " << jObj["name"].toInt();
+        QJsonArray arr = jObj["data"].toArray();
+        qDebug() << "Data Sensor 1: " << arr[0].toDouble();
+        qDebug() << "Data Sensor 2: " << arr[1].toDouble();
+        qDebug() << "Data Sensor 3: " << arr[2].toDouble()<<endl;
+    }
+
+    if (jerror.error != QJsonParseError::NoError) {
+        return false;
+    } else {
+        return true;
     }
 }

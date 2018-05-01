@@ -1,28 +1,34 @@
+#include <iostream>
+#include <QTextStream>
+#include <QTcpServer>
 #include "mytcp.h"
 
 MyTCP::MyTCP (QObject *parent) : QObject(parent)
 {
-    QByteArray data;
-    data = "Test";
-    tcpaddress.setAddress(QHostAddress::LocalHost);
-
     tcpsocket = new QTcpSocket(this);
-    connect(tcpsocket, SIGNAL(readyRead()), SLOT(readyRead()));
-
-    tcpsocket->connectToHost(QHostAddress::LocalHost, 15000);
+    connect( tcpsocket, SIGNAL(readyRead()), SLOT(readTCPData()) );
+    tcpsocket->connectToHost(QHostAddress::LocalHost, 42002);
     if (tcpsocket->waitForConnected()) {
-        tcpsocket->write(data);
+        qDebug("Connected to Host");
     }
 }
 
 void MyTCP::readyRead() {
-    QByteArray response;
-    response.resize(10);
-    response = tcpsocket->readAll();
 }
 
-//void MyTCP::sendCommand() {
-//    QByteArray cmd;
-//    cmd = "Test";
-//    tcpsocket->writeData(cmd, cmd.size());
-//}
+void MyTCP::readTCPData() {
+    QByteArray data = tcpsocket->readAll();
+    if (!data.isNull()){
+        qDebug()<<data;
+    }
+}
+
+void MyTCP::sendCommand() {
+    QByteArray command;
+    //QDateTime time = QDateTime::currentDateTime();
+    command.resize(10);
+    command = "test";
+    tcpsocket->write(command);
+
+    qDebug() << "Message to Client: " << command;
+}

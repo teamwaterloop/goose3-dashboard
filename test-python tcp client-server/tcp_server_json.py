@@ -4,8 +4,8 @@ import socket
 from datetime import datetime
 import time
 
-TCP_IP = "127.0.0.1"
-TCP_PORT = 15000
+TCP_IP = "localhost"
+TCP_PORT = 42002
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,12 +27,19 @@ data = {
 #except:
 #    print ("Error: unable to start thread")
 
-while True:
-    time.sleep(0.25)
-    data['size'] = 76
-    data['time'] = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
-    print ("time: " + data['time'] + "\n")
-    json_data = json.dumps(data, separators=(',',':'))
-    connection.sendall(json_data.encode('utf-8'))
+#while True:
+#    time.sleep(0.25)
+#    data['size'] = 76
+#    data['time'] = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+#    print ("time: " + data['time'] + "\n")
+#    json_data = json.dumps(data, separators=(',',':'))
+#    connection.sendall(json_data.encode('utf-8'))
+while 1:
+    data = connection.recv(10)
+    print(str(data))
+    connection.sendall(b"Received")
+    if (data):
+        break
+
     
 s.close()

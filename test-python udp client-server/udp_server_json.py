@@ -36,8 +36,9 @@ data = {
 
 while True:
     time.sleep(0.25)
-    data['size'] = 76
     data['time'] = datetime.now().strftime('%Y/%m/%d %H:%M:%S.%f')
+    data['size'] = sys.getsizeof(data['time']) + sys.getsizeof(data['name']);
+    print ("size: " + str(data['size'])) 
     print ("time: " + data['time'] + "\n")
     json_data = json.dumps(data, separators=(',',':'))
     s.sendto(json_data.encode('utf-8'), server)
