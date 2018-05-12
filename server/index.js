@@ -1,12 +1,11 @@
 
-// // Set up the serialport connection
-// var serialport = require("serialport"); 
-// var SerialPort = serialport.SerialPort; 
+// Set up the serialport connection
+var SerialPort = require('serialport');
 
-// var serialPort = new SerialPort("port name", {
-//   baudrate: 9600,
-//   parser: serialport.parsers.readline("\n")
-// });
+var serialPort = new SerialPort("/dev/cu.usbmodem14431", {
+  baudRate: 9600,
+  //parser: new SerialPort.parsers.Readline("\n")
+}, false);
 
 //Set up the websockets connection
 var WebSocketServer = require('websocket').server;
@@ -41,6 +40,16 @@ wsServer.on('request', function(r){
 });
 
 
+serialPort.on('data', function (data) {
+	//var _data =  JSON.stringify(data);
+
+  console.log(data.toString("utf8"));
+  wsServer.emit({"name":"John", "age":30, "car":null});
+});
+
+
+
+
 // serialPort.on("open", function () {
 //   console.log('open');
 //   serialPort.on('data', function(data) {
@@ -50,26 +59,26 @@ wsServer.on('request', function(r){
 
 
 
-// function write() //for writing
-// {
-//     serialPort.on('data', function (data) 
-//     {
-//         serialPort.write("Write your data here");
-//     });
-// }
+function write() //for writing
+{
+    serialPort.on('data', function (data) 
+    {
+        serialPort.write();
+    });
+}
 
-// function read () // for reading
-// {
-//     serialPort.on('data', function(data)
-//     {
-//     	wsServer.emit({"name":"John", "age":30, "car":null});
-//         console.log(data); 
-//     });  
-// }
+function read () // for reading
+{
+    serialPort.on('data', function(data)
+    {
+    	wsServer.emit({"name":"John", "age":30, "car":null});
+        console.log(data); 
+    });  
+}
 
-// serialPort.on('open', function() 
-// {
-//     // execute your functions
-//     //write(); 
-//     read(); 
-// });
+//serialPort.on('open', function() 
+//{
+    // execute your functions
+    //write(); 
+//    read(); 
+//});
