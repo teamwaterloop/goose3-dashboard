@@ -30,7 +30,7 @@ SOURCES += \
         jsonObject.cpp
 
 HEADERS += \
-        MainWindow.h
+        MainWindow.h \
         client.h \
         jsonObject.h
 
