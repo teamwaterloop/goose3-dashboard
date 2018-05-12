@@ -2,7 +2,7 @@
 #define CLIENT_H
 
 #include <QtCore/QObject>
-#include <QtWebSockets/QWebSocket>
+#include <QtWebSockets/QtWebSockets>
 #include "jsonObject.h"
 
 
@@ -18,11 +18,12 @@ Q_SIGNALS:
 private Q_SLOTS:
     void onConnected();
     void onTextMessageReceived(QString message);
+    void close();
 
 private:
     QWebSocket m_webSocket;
     QUrl m_url;
-    jsonData *model;
+    jsonData *m_model;
 };
 
 #endif // CLIENT_H
