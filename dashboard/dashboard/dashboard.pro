@@ -25,10 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        MainWindow.cpp
+        MainWindow.cpp \
+        client.cpp \
+        jsonObject.cpp
 
 HEADERS += \
         MainWindow.h
+        client.h \
+        jsonObject.h
 
 RESOURCES += \
     resources.qrc
