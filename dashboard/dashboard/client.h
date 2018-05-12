@@ -5,11 +5,11 @@
 #include <QtWebSockets/QWebSocket>
 #include "jsonObject.h"
 
-class EchoClient : public QObject
+class Client : public QObject
 {
     Q_OBJECT
 public:
-    explicit EchoClient(const QUrl &url, jsonObject *model = Q_NULLPTR);
+    explicit Client(const QUrl &url, jsonObject *model = Q_NULLPTR);
 
 Q_SIGNALS:
     void closed();
@@ -21,6 +21,7 @@ private Q_SLOTS:
 private:
     QWebSocket m_webSocket;
     QUrl m_url;
+    jsonObject *model;
 };
 
 #endif // CLIENT_H
