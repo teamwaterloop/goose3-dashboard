@@ -101,7 +101,7 @@ margin-right: 5px;
 background: white;</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;STOP&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;ACCEL&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -160,7 +160,9 @@ background: white;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">margin: 5px;
+         <string notr="true">margin-top: 5px;
+margin-left: 5px;
+margin-right: 5px;
 background: black;
 color: white;</string>
         </property>
@@ -242,7 +244,9 @@ background: white;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">margin: 5px;
+         <string notr="true">margin-top: 5px;
+margin-left: 5px;
+margin-right: 5px;
 background: black;
 color: white;</string>
         </property>
@@ -312,7 +316,9 @@ background: white;</string>
       <item>
        <widget class="QLabel" name="label_4">
         <property name="styleSheet">
-         <string notr="true">margin: 5px;
+         <string notr="true">margin-top: 5px;
+margin-left: 5px;
+margin-right: 5px;
 background: black;
 color: white;</string>
         </property>
