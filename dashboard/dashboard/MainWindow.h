@@ -6,6 +6,7 @@
 
 // Qt
 #include <QWidget>
+#include <QTimer>
 
 namespace Ui {
     class MainWindow;
@@ -21,8 +22,13 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public Q_SLOTS:
+    void updateUi();
+
 private:
     Ui::MainWindow *ui;
+    QTimer *timer;
+    int tts;
 };
 
 }
