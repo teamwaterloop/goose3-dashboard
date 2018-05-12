@@ -2,7 +2,10 @@
 #include "MainWindow.h"
 
 // Qt
+#include <QUrl>
 #include <QApplication>
+#include "jsonObject.h"
+#include "client.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,8 +13,8 @@ int main(int argc, char *argv[])
 
     // initalizing socket connection
     QUrl url("ws://localhost:8020/pod-data");
-    jsonObject json("");
-    Client(url, json);
+    jsonData json("");
+    Client(url, &json);
 
     wloop::MainWindow w;
     w.show();

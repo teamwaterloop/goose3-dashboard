@@ -6,7 +6,7 @@
 #include <QtWebSockets/QtWebSockets>
 
 
-jsonObject::jsonObject(QString str) {
+jsonData::jsonData(QString str) {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
     velocity = jsonObject["velocity"].toInt();
@@ -19,7 +19,7 @@ jsonObject::jsonObject(QString str) {
     time_since_start = jsonObject["time_since_start"].toInt();
 }
 
-jsonObject::updateModel(QString str) {
+void jsonData::updateModel(QString str) {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
     velocity = jsonObject["velocity"].toInt();
@@ -32,4 +32,4 @@ jsonObject::updateModel(QString str) {
     time_since_start = jsonObject["time_since_start"].toInt();
 }
 
-jsonObject::~jsonObject(){}
+jsonData::~jsonData(){}

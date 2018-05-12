@@ -2,10 +2,14 @@
 #define JSONOBJECT_H
 
 #include <QString>
+#include <QJsonObject>
 
-class jsonObject : public QString
+
+class jsonData;
+
+class jsonData
 {
-    QJsonObject jsonObject;
+    QJsonObject data;
     int velocity;
     int distance;
     int acceleration;
@@ -16,9 +20,9 @@ class jsonObject : public QString
     int time_since_start;
 
 public:
-    jsonObject(QString str);
-    ~jsonObject();
-    updateModel();
+    jsonData(QString str);
+    ~jsonData();
+    void updateModel(QString message);
 };
 
 #endif // JSONOBJECT_H
