@@ -1,7 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description: Reusable Label component with common styles
-  */
 import QtQuick 2.9
 
 Text {

@@ -1,9 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description:
-    This the the left-most speed pane. It shows the speed, acceleration
-    along with pod visualizations and other very important things.
-  */
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 

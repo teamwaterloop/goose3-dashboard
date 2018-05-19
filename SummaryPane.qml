@@ -1,9 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description:
-    Right-most summary pane displaying propulsion,
-    brakes, and battery state
-  */
 import QtQuick 2.9
 
 Rectangle {

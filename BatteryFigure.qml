@@ -1,8 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description:
-    battery figure with adjustable charge level
-    */
 import QtQuick 2.9
 
 Item {

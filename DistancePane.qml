@@ -1,9 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description:
-    Bottom-most distance pane in the pod
-    Visualizes pod distance in view and shows upcoming states
-  */
 import QtQuick 2.9
 
 Rectangle {

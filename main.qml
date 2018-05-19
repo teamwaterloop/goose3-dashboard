@@ -1,7 +1,3 @@
-/**
-  Author: Jashan S. Shewakramani
-  Description: Top-level window QML
-  */
 import QtQuick 2.10
 import QtQuick.Window 2.10
 
@@ -15,7 +11,8 @@ Window {
     visible: true
     width: windowWidth;
     height: windowHeight
-    title: qsTr("Goose 3 Dashboard")
+    title: qsTr("Waterloop Dashboard")
+
     color: "#347C8F"
 
     // left-most speed pane

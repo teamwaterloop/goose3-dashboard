@@ -1,8 +1,3 @@
-/**
-  Author: Jashan Shewakramani
-  Description:
-    label + sub-label to display speed acceleration etc.
-  */
 import QtQuick 2.0
 
 Rectangle {
