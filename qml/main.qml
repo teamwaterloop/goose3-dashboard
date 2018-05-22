@@ -11,7 +11,7 @@ Window {
     visible: true
     width: windowWidth;
     height: windowHeight
-    title: qsTr("Waterloop Dashboard")
+    title: qsTr("Goose Dashboard")
 
     color: "#347C8F"
 
