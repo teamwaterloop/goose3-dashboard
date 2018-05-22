@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Waterloop");
+    app.setOrganizationDomain("teamwaterloop.ca");
+    app.setWindowIcon(QIcon(":/res/wloop_icon.png"));
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
