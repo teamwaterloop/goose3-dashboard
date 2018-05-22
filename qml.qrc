@@ -1,12 +1,13 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>SpeedPane.qml</file>
-        <file>SummaryPane.qml</file>
-        <file>DistancePane.qml</file>
-        <file>SeparatingLine.qml</file>
-        <file>DataLabel.qml</file>
-        <file>Label.qml</file>
-        <file>BatteryFigure.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/SpeedPane.qml</file>
+        <file>qml/SummaryPane.qml</file>
+        <file>qml/DistancePane.qml</file>
+        <file>qml/SeparatingLine.qml</file>
+        <file>qml/DataLabel.qml</file>
+        <file>qml/Label.qml</file>
+        <file>qml/BatteryFigure.qml</file>
+        <file>res/wloop_icon.png</file>
     </qresource>
 </RCC>
