@@ -16,10 +16,18 @@ namespace wloop {
 class Data
 {
 public:
-    Data() = default;
-    Data(const QString& message);
+    Data();
 
     void update(const QString& message);
+
+    int acceleration();
+    int distance();
+    int velocity();
+    int propulsionTemp();
+    int brakingTemp();
+    int motherboardTemp();
+    int podState();
+    int timeSinceStart();
 
 private:
     int _velocity;
@@ -29,7 +37,6 @@ private:
     int _brakingTemp;
     int _motherboardTemp;
     int _podState;
-    int _timeSinceStart;
 };
 
 } // namespace wloop

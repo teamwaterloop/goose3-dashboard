@@ -19,14 +19,14 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // initalizing socket connection
-//    QUrl url = QUrl("wss://wloop2.localtunnel.me");
-//    jsonData json("");
-//    Client client(url, &json);
+    QUrl url("wss://localhost:6500");
+    wloop::Data data;
+    wloop::WSSClient wssClient(url, data);
 
-    wloop::MainWindow w;
+    wloop::MainWindow w(data);
     w.show();
 
-//    QObject::connect(&client, &Client::closed, &a, &QApplication::quit);
+    // QObject::connect(&wssClient, &wloop::WSSClient::closed, &a, &QApplication::quit);
 
     return a.exec();
 }

@@ -16,40 +16,33 @@
 
 namespace wloop {
 
-WSSClient::WSSClient(const QUrl &url) :
-    _url(url)
+WSSClient::WSSClient(const QUrl &url, Data &data) :
+    _url(url),
+    _data(data)
 {
-    _socket = new QWebSocket; // FIXME
+    _socket = new QWebSocket;
 
     connect(_socket, &QWebSocket::connected, this, &WSSClient::onConnected);
-    //if (!m_webSocket.isValid()) qDebug() << m_webSocket.error();
-    //connect(&m_webSocket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::error),
-      //  [=](QAbstractSocket::SocketError error){ qDebug() << "error connecting"; });
     connect(_socket, &QWebSocket::disconnected, this, &WSSClient::close);
-    connect(this, &WSSClient::close, this, &WSSClient::closed);
-    _socket->open(QUrl(url));
-    qDebug() << url.toString();
-    qDebug() << "constructor";
+
+    _socket->open(url);
 }
 
 void WSSClient::onConnected()
 {
-    //qDebug() << "connected";
-    connect(_socket, &QWebSocket::textMessageReceived,
-            this, &WSSClient::onTextMessageReceived);
-    //qDebug() << "connected";
-    //m_webSocket.sendTextMessage(QStringLiteral("Hello, world!"));
+    qDebug() << "connected";
+    connect(_socket, &QWebSocket::textMessageReceived, this, &WSSClient::onTextMessageReceived);
 }
 
 void WSSClient::onTextMessageReceived(QString message)
 {
-    qDebug() << message;
-    //model->updateModel(message);
+    _data.update(message);
 }
 
 void WSSClient::close()
 {
     _socket->close();
+    emit closed();
 }
 
 } // namespace wloop

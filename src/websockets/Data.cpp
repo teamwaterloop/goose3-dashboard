@@ -17,9 +17,15 @@
 
 namespace wloop {
 
-Data::Data(const QString& message)
+Data::Data() :
+    _velocity(0),
+    _distance(0),
+    _acceleration(0),
+    _propulsionTemp(0),
+    _brakingTemp(0),
+    _motherboardTemp(0),
+    _podState(0)
 {
-    update(message);
 }
 
 void Data::update(const QString& str)
@@ -33,7 +39,41 @@ void Data::update(const QString& str)
     _brakingTemp = jsonObject["braking_temp"].toInt();
     _motherboardTemp = jsonObject["motherboard_temp"].toInt();
     _podState = jsonObject["pod_state"].toInt();
-    _timeSinceStart = jsonObject["time_since_start"].toInt();
+    //_timeSinceStart = jsonObject["time_since_start"].toInt();
+}
+
+int Data::acceleration()
+{
+    return _acceleration;
+}
+
+int Data::distance()
+{
+    return _distance;
+}
+
+int Data::velocity()
+{
+    return _velocity;
+}
+
+int Data::propulsionTemp()
+{
+    return _propulsionTemp;
+}
+
+int Data::brakingTemp()
+{
+    return _brakingTemp;
+}
+
+int Data::motherboardTemp()
+{
+    return _motherboardTemp;
+}
+int Data::podState()
+{
+    return _podState;
 }
 
 } // namespace wloop

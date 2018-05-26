@@ -11,9 +11,15 @@
 // UI
 #include "ui_MainWindow.h"
 
+// Project
+#include "src/websockets/Data.h"
+
 // Qt
 #include <QWidget>
 #include <QTimer>
+
+// std
+#include <memory>
 
 namespace Ui {
     class MainWindow;
@@ -26,7 +32,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
+    MainWindow(Data& data, QWidget *parent = 0);
     ~MainWindow() = default;
 
 public Q_SLOTS:
@@ -36,6 +42,7 @@ private:
     Ui::MainWindow* _ui;
     QTimer* _timer;
     int _tts;
+    Data& _data;
 };
 
 } // namespace wloop

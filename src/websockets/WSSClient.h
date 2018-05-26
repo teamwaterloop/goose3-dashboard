@@ -23,8 +23,9 @@ namespace wloop {
 class WSSClient : public QObject
 {
     Q_OBJECT
+
 public:
-    explicit WSSClient(const QUrl &url);
+    explicit WSSClient(const QUrl &url, Data& data);
 
 signals:
     void closed();
@@ -37,7 +38,7 @@ private slots:
 private:
     QWebSocket* _socket;
     QUrl _url;
-    Data _data;
+    Data& _data;
 };
 
 } // namespace wloop
