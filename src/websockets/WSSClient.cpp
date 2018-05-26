@@ -30,12 +30,13 @@ WSSClient::WSSClient(const QUrl &url, Data &data) :
 
 void WSSClient::onConnected()
 {
-    qDebug() << "connected";
+    qDebug() << Q_FUNC_INFO;
     connect(_socket, &QWebSocket::textMessageReceived, this, &WSSClient::onTextMessageReceived);
 }
 
 void WSSClient::onTextMessageReceived(QString message)
 {
+    qDebug() << Q_FUNC_INFO;
     _data.update(message);
 }
 
