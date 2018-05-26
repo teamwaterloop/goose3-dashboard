@@ -25,17 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        MainWindow.cpp \
-        client.cpp \
-        jsonObject.cpp
+        src/MainWindow.cpp \
+    src/websockets/Data.cpp \
+    src/websockets/WSSClient.cpp
 
 HEADERS += \
-        MainWindow.h \
-        client.h \
-        jsonObject.h
+        src/MainWindow.h \
+    src/websockets/Data.h \
+    src/websockets/WSSClient.h
 
 RESOURCES += \
     resources.qrc
 
 FORMS += \
-    mainwindow.ui
+    ui/mainwindow.ui
