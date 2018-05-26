@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     // initalizing socket connection
-    QUrl url("wss://localhost:6500");
+    QUrl url("ws://localhost:6500");
     wloop::Data data;
     wloop::WSSClient wssClient(url, data);
 
