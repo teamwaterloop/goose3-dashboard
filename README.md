@@ -1,1 +1,1 @@
-# Waterloop Goose 2 Pod Dashboard
+# Waterloop Goose 2 Showcase Event Dashboard
