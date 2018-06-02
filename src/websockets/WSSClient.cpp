@@ -34,6 +34,13 @@ void WSSClient::onConnected()
     connect(_socket, &QWebSocket::textMessageReceived, this, &WSSClient::onTextMessageReceived);
 }
 
+bool WSSClient::sendMessage(QByteArray message)
+{
+    qDebug() << message;
+    int bytesSent = _socket->sendTextMessage(message);
+    return (bytesSent > 0);
+}
+
 void WSSClient::onTextMessageReceived(QString message)
 {
     qDebug() << Q_FUNC_INFO;

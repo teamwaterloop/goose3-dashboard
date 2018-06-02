@@ -26,6 +26,7 @@ class WSSClient : public QObject
 
 public:
     explicit WSSClient(const QUrl &url, Data& data);
+    bool sendMessage(QByteArray message);
 
 signals:
     void closed();

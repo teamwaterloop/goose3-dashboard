@@ -6,7 +6,7 @@
  *****************************************************/
 
 #ifndef WLOOP_MAINWINDOW_H
-#define WLOPP_MAINWINDOW_H
+#define WLOOP_MAINWINDOW_H
 
 // UI
 #include "ui_MainWindow.h"
