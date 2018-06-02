@@ -39,8 +39,8 @@ MainWindow::MainWindow(Data &data, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete timer;
-    delete ui;
+    delete _timer;
+    delete _ui;
 }
 
 void MainWindow::updateUi()
