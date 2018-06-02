@@ -27,6 +27,20 @@ MainWindow::MainWindow(Data &data, QWidget *parent)
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateUi()));
     _timer->start(1000);
+
+//    auto view = new QQuickView;
+//    QWidget *container = QWidget::createWindowContainer(view, this);
+//    container->setMinimumSize(200, 200);
+//    container->setMaximumSize(200, 200);
+//    container->setFocusPolicy(Qt::TabFocus);
+//    view->setSource(QUrl("main.qml"));
+//    ui->verticalLayout->addWidget(container);
+}
+
+MainWindow::~MainWindow()
+{
+    delete timer;
+    delete ui;
 }
 
 void MainWindow::updateUi()

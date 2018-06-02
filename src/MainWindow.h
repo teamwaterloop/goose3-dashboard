@@ -33,7 +33,7 @@ class MainWindow : public QWidget
 
 public:
     MainWindow(Data& data, QWidget *parent = 0);
-    ~MainWindow() = default;
+    ~MainWindow();
 
 public Q_SLOTS:
     void updateUi();

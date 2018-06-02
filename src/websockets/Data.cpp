@@ -30,7 +30,7 @@ Data::Data() :
 
 void Data::update(const QString& str)
 {
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(str);
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
     _velocity = jsonObject["velocity"].toInt();
     _distance = jsonObject["distance"].toInt();
