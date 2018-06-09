@@ -20,23 +20,35 @@ public:
 
     void update(const QString& message);
 
-    int acceleration();
-    int distance();
-    int velocity();
+    double acceleration();
+    double distance();
+    double velocity();
     int propulsionTemp();
     int brakingTemp();
     int motherboardTemp();
-    int podState();
+    QString podState();
     int timeSinceStart();
 
+    //Added levitation, mag wheel speed left and right and friction drive speed for goose2 showcase event
+    bool lev();
+    double mag_speed_l();
+    double mag_speed_r();
+    double fr_wheel();
+
 private:
-    int _velocity;
-    int _distance;
-    int _acceleration;
+    double _velocity;
+    double _distance;
+    double _acceleration;
     int _propulsionTemp;
     int _brakingTemp;
     int _motherboardTemp;
-    int _podState;
+    QString _podState;
+
+    bool _lev;
+    double _mag_speed_l;
+    double _mag_speed_r;
+    double _fr_wheel;
+
 };
 
 } // namespace wloop

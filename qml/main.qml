@@ -55,7 +55,7 @@ ApplicationWindow {
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "Left Wheel"
+                        text: "Left Mag Wheel"
                         font.pixelSize: 20
                     }
                 }
@@ -85,7 +85,7 @@ ApplicationWindow {
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "Right Wheel"
+                        text: "Right Mag Wheel"
                         font.pixelSize: 20
                     }
                 }
@@ -103,8 +103,11 @@ ApplicationWindow {
                 ColumnLayout {
                     Switch {
                         id: levSwitch
+                        objectName: "levSwitch"
                         anchors.horizontalCenter: parent.horizontalCenter
+                        signal levitationChanged(var check)
                         checked: false
+                        onCheckedChanged: levSwitch.levitationChanged(checked)
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -156,7 +159,7 @@ ApplicationWindow {
                 }
 
                 Label {
-                    text: "Waterloop UI ver 1.0"
+                    text: "Waterloop UI \n      ver 1.2"
                 }
 
             }

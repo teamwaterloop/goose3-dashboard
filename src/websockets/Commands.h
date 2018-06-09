@@ -6,6 +6,7 @@
 #include <QString>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QDebug>
 
 
 namespace wloop {
@@ -16,13 +17,20 @@ class Commands : public QObject
 
 public:
     explicit Commands(WSSClient &socket);
-    bool sendCommands(bool levitation, int mag_speed, int fr_drive);
+
+public slots:
+    void levChanged(const QVariant &v);
+    void frDriveChanged(const QVariant &v);
+    void magWheelChanged(const QVariant &v);
+
 
 private:
-    int _frdrive_speed;
-    int _magwheel_speed;
+    double _frdrive_speed;
+    double _magwheel_speed;
     bool _lev;
-    WSSClient &_socket;
+    WSSClient &_client;
+
+    bool sendCommand(QString cmd_type, const QVariant v);
 
 };
 

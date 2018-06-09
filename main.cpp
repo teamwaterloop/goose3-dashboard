@@ -8,11 +8,14 @@
 // Project
 #include "src/websockets/Data.h"
 #include "src/websockets/WSSClient.h"
+#include "src/websockets/Commands.h"
 
 // Qt
 #include <QUrl>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickView>
+#include <QQuickItem>
 #include <QIcon>
 
 int main(int argc, char *argv[])
@@ -28,13 +31,20 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
-    if (engine.rootObjects().isEmpty())
+    QList <QObject *> qmlRoot = engine.rootObjects();
+    if (qmlRoot.isEmpty())
         return -1;
 
-    // initalizing socket connection
+    QObject *rootObject = qmlRoot.first();
+    QObject *qmlObject = rootObject->findChild<QObject *>("levSwitch");
+
+    // initalizing websocket connection
     QUrl url("ws://localhost:6500");
     wloop::Data data;
     wloop::WSSClient wssClient(url, data);
+    wloop::Commands cmd(wssClient);
+
+    QObject::connect(qmlObject, SIGNAL(levitationChanged(QVariant)), &cmd, SLOT(levChanged(QVariant)));
 
     return app.exec();
 }

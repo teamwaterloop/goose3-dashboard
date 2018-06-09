@@ -24,7 +24,11 @@ Data::Data() :
     _propulsionTemp(0),
     _brakingTemp(0),
     _motherboardTemp(0),
-    _podState(0)
+    _podState("IDLE"),
+    _lev(false),
+    _mag_speed_l(0),
+    _mag_speed_r(0),
+    _fr_wheel(0)
 {
 }
 
@@ -32,27 +36,32 @@ void Data::update(const QString& str)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
-    _velocity = jsonObject["velocity"].toInt();
-    _distance = jsonObject["distance"].toInt();
-    _acceleration = jsonObject["acceleration"].toInt();
+    _velocity = jsonObject["velocity"].toDouble();
+    _distance = jsonObject["distance"].toDouble();
+    _acceleration = jsonObject["acceleration"].toDouble();
     _propulsionTemp = jsonObject["propulsion_temp"].toInt();
     _brakingTemp = jsonObject["braking_temp"].toInt();
     _motherboardTemp = jsonObject["motherboard_temp"].toInt();
-    _podState = jsonObject["pod_state"].toInt();
+    _podState = jsonObject["pod_state"].toString();
+
+    _lev = jsonObject["levitation"].toBool();
+    _mag_speed_l = jsonObject["mag_l"].toDouble();
+    _mag_speed_r = jsonObject["mag_r"].toDouble();
+    _fr_wheel = jsonObject["fr_drive"].toDouble();
     //_timeSinceStart = jsonObject["time_since_start"].toInt();
 }
 
-int Data::acceleration()
+double Data::acceleration()
 {
     return _acceleration;
 }
 
-int Data::distance()
+double Data::distance()
 {
     return _distance;
 }
 
-int Data::velocity()
+double Data::velocity()
 {
     return _velocity;
 }
@@ -71,7 +80,7 @@ int Data::motherboardTemp()
 {
     return _motherboardTemp;
 }
-int Data::podState()
+QString Data::podState()
 {
     return _podState;
 }
