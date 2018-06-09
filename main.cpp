@@ -6,27 +6,35 @@
  *****************************************************/
 
 // Project
-#include "src/MainWindow.h"
 #include "src/websockets/Data.h"
 #include "src/websockets/WSSClient.h"
 
 // Qt
 #include <QUrl>
-#include <QApplication>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QCoreApplication::setAttribute(Qt::AA_DisableShaderDiskCache);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    QGuiApplication app(argc, argv);
+    QGuiApplication::setApplicationName("Goose Dashboard");
+    QGuiApplication::setOrganizationName("Waterloop");
+    QGuiApplication::setOrganizationDomain("teamwaterloop.ca");
+    QGuiApplication::setWindowIcon(QIcon(":/res/icon.png"));
+
+    QQmlApplicationEngine engine;
+    engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
 
     // initalizing socket connection
     QUrl url("ws://localhost:6500");
     wloop::Data data;
     wloop::WSSClient wssClient(url, data);
 
-    wloop::MainWindow w(data);
-    w.show();
-
-    // QObject::connect(&wssClient, &wloop::WSSClient::closed, &a, &QApplication::quit);
-
-    return a.exec();
+    return app.exec();
 }
