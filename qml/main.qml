@@ -94,7 +94,19 @@ ApplicationWindow {
 
             RowLayout {
                 anchors.centerIn: parent
-                spacing: 50
+                spacing: 100
+
+                ColumnLayout {
+                    CircularGauge {
+                        value: 0
+                        anchors.centerIn: parent
+                    }
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "Friction Wheel"
+                        font.pixelSize: 20
+                    }
+                }
 
                 Item {
                     Layout.fillWidth: true

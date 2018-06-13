@@ -19,7 +19,7 @@ class Data : public QObject
     Q_OBJECT
 
 public:
-    Data();
+    Data(QObject* parent = nullptr);
 
     void update(const QString& message);
 
@@ -38,7 +38,7 @@ public:
     double mag_speed_r();
     double fr_wheel();
 
-public: signals:
+signals:
     void velocityChangedSignal();
     void distanceChangedSignal();
     void accelerationChangedSignal();
@@ -64,8 +64,6 @@ private:
     double _mag_speed_l;
     double _mag_speed_r;
     double _fr_wheel;
-
-
 };
 
 } // namespace wloop

@@ -18,7 +18,8 @@
 
 namespace wloop {
 
-Data::Data() :
+Data::Data(QObject *parent) :
+    QObject(parent),
     _velocity(0),
     _distance(0),
     _acceleration(0),
