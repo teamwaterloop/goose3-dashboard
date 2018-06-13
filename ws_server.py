@@ -50,18 +50,17 @@ def new_cmd(client, server, message):
     #print(msg_json['fr_speed'] + "\n")    
 
     
-server = ws(6500, host='127.0.0.1')
 
-if __name__ == "__main__":
-    server = ws(6500, host='127.0.0.1')
-    try:
-        print ('Server start')
-        server.set_fn_new_client(send_data)
-        server.set_fn_message_received(new_cmd)
-    except:
-        print ('Exception')
-    finally:
-        for process in multiprocessing.active_children():
-            process.terminate()
-            process.join()
-    print ('Goodbye')
+server = ws(6500, host='127.0.0.1')
+try:
+    print ('Server start')
+    server.set_fn_new_client(new_client)
+    server.set_fn_message_received(new_cmd)
+    server.run_forever()
+except:
+    print ('Exception')
+finally:
+    for process in multiprocessing.active_children():
+        process.terminate()
+        process.join()
+        print ('Goodbye')

@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QDebug>
+#include <QObject>
 
 
 namespace wloop {
@@ -25,10 +26,11 @@ public slots:
 
 
 private:
-    double _frdrive_speed;
-    double _magwheel_speed;
-    bool _lev;
+//    double _frdrive_speed;
+//    double _magwheel_speed;
+//    bool _lev;
     WSSClient &_client;
+    //Data &_data;
 
     bool sendCommand(QString cmd_type, const QVariant v);
 

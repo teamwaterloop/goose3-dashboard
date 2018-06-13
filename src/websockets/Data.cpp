@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QList>
 #include <QString>
+#include <QObject>
 #include <QtWebSockets/QtWebSockets>
 
 namespace wloop {
@@ -49,6 +50,11 @@ void Data::update(const QString& str)
     _mag_speed_r = jsonObject["mag_r"].toDouble();
     _fr_wheel = jsonObject["fr_drive"].toDouble();
     //_timeSinceStart = jsonObject["time_since_start"].toInt();
+
+    emit levChangedSignal();
+    emit magSpeedRChangedSignal();
+    emit magSpeedLChangedSignal();
+    emit frWheelChangedSignal();
 }
 
 double Data::acceleration()
@@ -83,6 +89,23 @@ int Data::motherboardTemp()
 QString Data::podState()
 {
     return _podState;
+}
+
+bool Data::lev()
+{
+    return _lev;
+}
+double Data::mag_speed_l()
+{
+    return _mag_speed_l;
+}
+double Data::mag_speed_r()
+{
+    return _mag_speed_r;
+}
+double Data::fr_wheel()
+{
+    return _fr_wheel;
 }
 
 } // namespace wloop

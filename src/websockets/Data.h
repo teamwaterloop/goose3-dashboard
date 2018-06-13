@@ -10,11 +10,14 @@
 
 //Qt
 #include <QString>
+#include <QObject>
 
 namespace wloop {
 
-class Data
+class Data : public QObject
 {
+    Q_OBJECT
+
 public:
     Data();
 
@@ -35,6 +38,19 @@ public:
     double mag_speed_r();
     double fr_wheel();
 
+public: signals:
+    void velocityChangedSignal();
+    void distanceChangedSignal();
+    void accelerationChangedSignal();
+    void propulsionTempChangedSignal();
+    void brakingTempChangedSignal();
+    void motherboardTempChangedSignal();
+    void podStateChangedSignal();
+    void levChangedSignal();
+    void magSpeedLChangedSignal();
+    void magSpeedRChangedSignal();
+    void frWheelChangedSignal();
+
 private:
     double _velocity;
     double _distance;
@@ -48,6 +64,7 @@ private:
     double _mag_speed_l;
     double _mag_speed_r;
     double _fr_wheel;
+
 
 };
 
