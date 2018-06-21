@@ -1,38 +1,31 @@
-#include "logger.h"
-#include <QDebug>
+#ifndef LOGGER_H
+#define LOGGER_H
 
+#include <QObject>
+#include <QFile>
+#include <QDateTime>
+#include <QSaveFile>
+#include <QString>
 
-Logger::Logger(const QString &fileName, QObject *parent) : QObject(parent), file(){
-    m_showDate = true;
-    qDebug() << "!fileName.isEmpty() = " << !fileName.isEmpty();
-    //QSaveFile file("");
-    if (!fileName.isEmpty()) {
-       file.setFileName(fileName);
-    }
+class Logger : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Logger(const QString &fileName, QObject *parent = nullptr);
+    ~Logger();
+    void setShowDateTime(bool value);
+    QString getFileName();
 
-    qDebug() << "fileName = " << fileName;
-    qDebug() << "file.fileName() = " << file.fileName();
-}
+private:
+    QSaveFile *file;
+    bool m_showDate;
 
-bool Logger::write(const QString &value) {
-    QString text = value;
-    if (m_showDate)
-        text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") + text;
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Append | QIODevice::Text))
-      return false;
-    if (-1 == file.write(text.toUtf8()))
-      return false;
-    return file.commit();
-}
+signals:
 
-QString Logger::getFileName(){
-    return file.fileName();
-}
+public slots:
+    bool write(const QString &value);
 
-void Logger::setShowDateTime(bool value) {
-    m_showDate = value;
-}
+};
 
-Logger::~Logger() {
-    if (file.isOpen()) file.commit();
-}
+#endif // LOGGER_H
+
