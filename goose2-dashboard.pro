@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
     src/websockets/Data.cpp \
     src/websockets/WSSClient.cpp \
-    src/websockets/Commands.cpp
+    src/websockets/Commands.cpp \
+    src/websockets/logger.cpp
 
 HEADERS += \
     src/websockets/Data.h \
     src/websockets/WSSClient.h \
-    src/websockets/Commands.h
+    src/websockets/Commands.h \
+    src/websockets/logger.h
 
 RESOURCES += \
     resources.qrc

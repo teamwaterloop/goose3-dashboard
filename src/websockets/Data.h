@@ -23,6 +23,11 @@ public:
 
     void update(const QString& message);
 
+    int time();
+    QString type();
+    int name();
+    double data();
+
     double acceleration();
     double distance();
     double velocity();
@@ -52,6 +57,10 @@ signals:
     void frWheelChangedSignal();
 
 private:
+    int _time;
+    QString _type;
+    int _name;
+    double _data;
     double _velocity;
     double _distance;
     double _acceleration;

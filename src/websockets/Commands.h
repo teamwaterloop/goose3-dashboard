@@ -26,9 +26,9 @@ public slots:
 
 
 private:
-//    double _frdrive_speed;
-//    double _magwheel_speed;
-//    bool _lev;
+    //    double _frdrive_speed;
+    //    double _magwheel_speed;
+    //    bool _lev;
     WSSClient &_client;
     //Data &_data;
 

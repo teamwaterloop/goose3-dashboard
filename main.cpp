@@ -36,8 +36,11 @@ int main(int argc, char *argv[])
     QObject *rootObject = qmlRoot.first();
     QObject *qmlObject = rootObject->findChild<QObject *>("levSwitch");
 
+    wloop::Logger log();
+
+
     // initalizing websocket connection
-    QUrl url("ws://localhost:6500");
+    QUrl url("ws://localhost:6500/v1/ws");
     wloop::Data data;
     wloop::WSSClient wssClient(url, data);
     wloop::Commands cmd(wssClient);

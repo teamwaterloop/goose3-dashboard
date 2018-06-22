@@ -10,7 +10,7 @@ Commands::Commands(WSSClient &client) :
 }
 
 void Commands::levChanged(const QVariant &v) {
-   // _lev = v.toBool();
+    // _lev = v.toBool();
     qDebug() << "Levitation changed to: "<< v.toString();
     sendCommand("levitation", v.toBool());
 }

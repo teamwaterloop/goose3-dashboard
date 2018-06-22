@@ -74,6 +74,7 @@ ApplicationWindow {
             y: 233
             width: 298
             height: 309
+            scale: 1
             CircularGauge {
                 id: fricGauge
                 objectName: "fricGauge"
@@ -81,6 +82,8 @@ ApplicationWindow {
                 anchors.horizontalCenter: parent.rightMargin
                 property double fricval: 0.0
                 x: 100
+                scale: 1
+                enabled: true
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.columnSpan: 5

@@ -20,6 +20,10 @@ namespace wloop {
 
 Data::Data(QObject *parent) :
     QObject(parent),
+    _time(0),
+    _type("none"),
+    _name(0),
+    _data(0),
     _velocity(0),
     _distance(0),
     _acceleration(0),
@@ -36,26 +40,53 @@ Data::Data(QObject *parent) :
 
 void Data::update(const QString& str)
 {
+    qDebug() << str;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
-    _velocity = jsonObject["velocity"].toDouble();
-    _distance = jsonObject["distance"].toDouble();
-    _acceleration = jsonObject["acceleration"].toDouble();
-    _propulsionTemp = jsonObject["propulsion_temp"].toInt();
-    _brakingTemp = jsonObject["braking_temp"].toInt();
-    _motherboardTemp = jsonObject["motherboard_temp"].toInt();
-    _podState = jsonObject["pod_state"].toString();
+    //    _velocity = jsonObject["velocity"].toDouble();
+    //    _distance = jsonObject["distance"].toDouble();
+    //    _acceleration = jsonObject["acceleration"].toDouble();
+    //    _propulsionTemp = jsonObject["propulsion_temp"].toInt();
+    //    _brakingTemp = jsonObject["braking_temp"].toInt();
+    //    _motherboardTemp = jsonObject["motherboard_temp"].toInt();
+    //    _podState = jsonObject["pod_state"].toString();
 
-    _lev = jsonObject["levitation"].toBool();
-    _mag_speed_l = jsonObject["mag_l"].toDouble();
-    _mag_speed_r = jsonObject["mag_r"].toDouble();
-    _fr_wheel = jsonObject["fr_drive"].toDouble();
+    //    _time = jsonObject['time'].toInt();
+    //    _type = jsonObject['type'].toString();
+    //    _name = jsonObject['name'].toInt();
+    //    _data = jsonObject['data'].toDouble();
+
+    //    qDebug() << _time;
+    //    qDebug() << _type;
+    //    qDebug() << _name;
+    //    qDebug() << _data;
+
+    //    _lev = jsonObject["levitation"].toBool();
+    //    _mag_speed_l = jsonObject["mag_l"].toDouble();
+    //    _mag_speed_r = jsonObject["mag_r"].toDouble();
+    //    _fr_wheel = jsonObject["fr_drive"].toDouble();
     //_timeSinceStart = jsonObject["time_since_start"].toInt();
 
     emit levChangedSignal();
     emit magSpeedRChangedSignal();
     emit magSpeedLChangedSignal();
     emit frWheelChangedSignal();
+}
+
+int Data::time() {
+    return _time;
+}
+
+QString Data::type() {
+    return _type;
+}
+
+int Data::name() {
+    return _name;
+}
+
+double Data::data() {
+    return _data;
 }
 
 double Data::acceleration()
@@ -108,5 +139,7 @@ double Data::fr_wheel()
 {
     return _fr_wheel;
 }
+
+
 
 } // namespace wloop
