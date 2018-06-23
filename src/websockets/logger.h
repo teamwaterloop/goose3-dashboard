@@ -1,33 +1,33 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+//#ifndef LOGGER_H
+//#define LOGGER_H
 
-#include <QObject>
-#include <QPlainTextEdit>
-#include <QSaveFile>
-#include <QTextStream>
-#include <QDateTime>
+//#include <QObject>
+//#include <QPlainTextEdit>
+//#include <QSaveFile>
+//#include <QTextStream>
+//#include <QDateTime>
 
-namespace wloop {
+//namespace wloop {
 
-class Logger : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Logger(QObject *parent, QString fileName = "./test.txt");
-    ~Logger();
-    void setShowDateTime(bool value);
+//class Logger : public QObject
+//{
+//    Q_OBJECT
+//public:
+//    explicit Logger(QObject *parent, QString fileName = "./test.txt");
+//    ~Logger();
+//    void setShowDateTime(bool value);
 
-private:
-    QSaveFile *file;
-    //QPlainTextEdit *m_editor;
-    bool m_showDate;
+//private:
+//    QSaveFile *file;
+//    //QPlainTextEdit *m_editor;
+//    bool m_showDate;
 
-signals:
+//signals:
 
-public slots:
-    void write_to_log(const QString &value);
+//public slots:
+//    void write_to_log(const QString &value);
 
-};
+//};
 
-} //end namespace
-#endif // LOGGER_H
+//} //end namespace
+//#endif // LOGGER_H

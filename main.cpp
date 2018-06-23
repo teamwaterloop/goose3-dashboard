@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QObject *rootObject = qmlRoot.first();
     QObject *qmlObject = rootObject->findChild<QObject *>("levSwitch");
 
-    wloop::Logger log();
+    //wloop::Logger log();
 
 
     // initalizing websocket connection
