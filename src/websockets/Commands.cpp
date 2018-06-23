@@ -43,19 +43,15 @@ bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
         {"name", _hash[cmd_type]},
         {"data", dataArray}
     };
+    QJsonDocument cmd_doc(commandObject);
 
-    qDebug() << commandObject;
-
-    return _client.sendMessage(QJsonDocument(commandObject).toBinaryData());
-    QString text = cmd_type + v.toString();
+    QString text(cmd_doc.toJson());
     _log.write(text);
 
-    //QJsonObject commandObject;
-    commandObject.insert(cmd_type, QJsonValue::fromVariant(v));
+//    qDebug() << sizeof(cmd_doc.toBinaryData());
+//    qDebug() << sizeof(cmd_doc.toJson());
 
-    QJsonDocument cmd(commandObject);
-    bool sent = _client.sendMessage(cmd.toJson());
-    return sent;
+    return _client.sendMessage(cmd_doc.toJson());
 }
 
 } //namespace wloop
