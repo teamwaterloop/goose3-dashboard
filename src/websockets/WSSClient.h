@@ -10,6 +10,7 @@
 
 // Project
 #include "Data.h"
+#include "logger.h"
 
 // Qt
 #include <QObject>
@@ -25,7 +26,7 @@ class WSSClient : public QObject
     Q_OBJECT
 
 public:
-    explicit WSSClient(const QUrl &url, Data& data);
+    explicit WSSClient(const QUrl &url, Data &data, Logger &log);
     bool sendMessage(QByteArray message);
 
 signals:
@@ -38,6 +39,7 @@ private slots:
 
 private:
     QWebSocket* _socket;
+    Logger &_log;
     QUrl _url;
     Data& _data;
 };

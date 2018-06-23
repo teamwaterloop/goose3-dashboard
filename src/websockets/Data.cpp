@@ -65,7 +65,7 @@ void Data::update(const QString& str)
     //    _mag_speed_l = jsonObject["mag_l"].toDouble();
     //    _mag_speed_r = jsonObject["mag_r"].toDouble();
     //    _fr_wheel = jsonObject["fr_drive"].toDouble();
-    //_timeSinceStart = jsonObject["time_since_start"].toInt();
+    //    _timeSinceStart = jsonObject["time_since_start"].toInt();
 
     emit levChangedSignal();
     emit magSpeedRChangedSignal();

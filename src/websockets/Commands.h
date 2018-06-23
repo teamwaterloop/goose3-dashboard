@@ -2,6 +2,7 @@
 #define WLOOP_COMMANDS_H
 
 #include "WSSClient.h"
+#include "logger.h"
 
 #include <QString>
 #include <QJsonObject>
@@ -18,7 +19,7 @@ class Commands : public QObject
     Q_OBJECT
 
 public:
-    explicit Commands(WSSClient &socket);
+    explicit Commands(WSSClient &socket, Logger &log);
 
 public slots:
     void levChanged(const QVariant &v);
@@ -31,6 +32,7 @@ private:
     //    double _magwheel_speed;
     //    bool _lev;
     WSSClient &_client;
+    Logger &_log;
     //Data &_data;
 
     QHash<QString, int> _hash;

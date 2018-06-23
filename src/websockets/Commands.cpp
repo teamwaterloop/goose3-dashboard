@@ -5,8 +5,9 @@
 
 namespace wloop {
 
-Commands::Commands(WSSClient &client) :
-    _client(client)
+Commands::Commands(WSSClient &client, Logger &log) :
+    _client(client),
+    _log(log)
 {
     _hash["magwheel_right"] = 0;
     _hash["magwheel_left"] = 1;
@@ -46,6 +47,15 @@ bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
     qDebug() << commandObject;
 
     return _client.sendMessage(QJsonDocument(commandObject).toBinaryData());
+    QString text = cmd_type + v.toString();
+    _log.write(text);
+
+    //QJsonObject commandObject;
+    commandObject.insert(cmd_type, QJsonValue::fromVariant(v));
+
+    QJsonDocument cmd(commandObject);
+    bool sent = _client.sendMessage(cmd.toJson());
+    return sent;
 }
 
 } //namespace wloop

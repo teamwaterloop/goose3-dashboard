@@ -9,6 +9,7 @@
 #include "src/websockets/Data.h"
 #include "src/websockets/WSSClient.h"
 #include "src/websockets/Commands.h"
+#include "src/websockets/logger.h"
 
 // Qt
 #include <QUrl>
@@ -24,8 +25,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QGuiApplication::setApplicationName("Goose Dashboard");
     QGuiApplication::setOrganizationName("Waterloop");
-    QGuiApplication::setOrganizationDomain("teamwaterloop.ca");
+    QGuiApplication::setOrganizationDomain("waterloop.ca");
     QGuiApplication::setWindowIcon(QIcon(":/res/icon.png"));
+
+    wloop::Logger log("test", "csv");
+
+    QObject::connect(&app, SIGNAL(aboutToQuit()), &log, SLOT(destruct()));
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:///qml/main.qml")));
@@ -36,14 +41,11 @@ int main(int argc, char *argv[])
     QObject *rootObject = qmlRoot.first();
     QObject *qmlObject = rootObject->findChild<QObject *>("levSwitch");
 
-    //wloop::Logger log();
-
-
     // initalizing websocket connection
     QUrl url("ws://localhost:6500/v1/ws");
     wloop::Data data;
-    wloop::WSSClient wssClient(url, data);
-    wloop::Commands cmd(wssClient);
+    wloop::WSSClient wssClient(url, data, log);
+    wloop::Commands cmd(wssClient, log);
 
     QObject::connect(qmlObject, SIGNAL(levitationChanged(QVariant)), &cmd, SLOT(levChanged(QVariant)));
 
