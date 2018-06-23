@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationDomain("waterloop.ca");
     QGuiApplication::setWindowIcon(QIcon(":/res/icon.png"));
 
-    wloop::Logger log("./test", "csv");
+    wloop::Logger log("test", "csv");
 
     QObject::connect(&app, SIGNAL(aboutToQuit()), &log, SLOT(destruct()));
 

@@ -1,5 +1,6 @@
 #include "logger.h"
 #include <QDebug>
+#include <QStandardPaths>
 
 namespace wloop {
 
@@ -7,16 +8,22 @@ Logger::Logger(const QString &fileName, const QString &extension,
                const bool showDateTimePerLine, const bool dateTimeInFileName,
                QObject *parent) : m_showDate(showDateTimePerLine), QObject(parent){
     if (dateTimeInFileName) {
-        m_fileName = fileName + "-" + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ")
+        QString path = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0] + "/Github/";
+        //QString path = "/Users/Ash/Documents/Github/";
+        m_fileName = path + fileName + "-" + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")
                 + "." + extension;
+        qDebug() << m_fileName;
     } else {
         m_fileName = fileName + "." + extension;
     }
 
-    if (!fileName.isEmpty()) {
+    if (file.fileName().isEmpty()) {
        file.setFileName(m_fileName);
     }
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    if (file.open(QIODevice::WriteOnly))
+        qDebug() << "File opened sucessfully";
+    else
+        qDebug() << "Couldn't open file";
 }
 
 bool Logger::write(const QString &value) {
@@ -36,10 +43,12 @@ bool Logger::write(const QString &value) {
         return true;
 }
 
-void Logger::destruct()
+bool Logger::destruct()
 {
     qDebug() << Q_FUNC_INFO;
-    file.commit();
+    bool x =  file.commit();
+    qDebug() << x;
+    return x;
 }
 
 QString Logger::getFileName(){

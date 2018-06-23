@@ -31,7 +31,7 @@ signals:
     void onClose();
 
 public slots:
-    void destruct();
+    bool destruct();
 };
 }
 
