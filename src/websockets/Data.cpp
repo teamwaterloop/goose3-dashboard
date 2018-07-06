@@ -23,7 +23,7 @@ Data::Data(QObject *parent) :
     _time(0),
     _type("none"),
     _name(0),
-    _data(0),
+//    _data(0),
     _velocity(0),
     _distance(0),
     _acceleration(0),
@@ -43,77 +43,67 @@ void Data::update(const QString& str)
     qDebug() << str;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
-    //    _velocity = jsonObject["velocity"].toDouble();
-    //    _distance = jsonObject["distance"].toDouble();
-    //    _acceleration = jsonObject["acceleration"].toDouble();
-    //    _propulsionTemp = jsonObject["propulsion_temp"].toInt();
-    //    _brakingTemp = jsonObject["braking_temp"].toInt();
-    //    _motherboardTemp = jsonObject["motherboard_temp"].toInt();
-    //    _podState = jsonObject["pod_state"].toString();
 
-    //    _time = jsonObject['time'].toInt();
-    //    _type = jsonObject['type'].toString();
-    //    _name = jsonObject['name'].toInt();
-    //    _data = jsonObject['data'].toDouble();
+    _time = jsonObject.value('time').toInt();
+    _type = jsonObject['type'].toString();
+    _name = jsonObject['name'].toInt();
+    QJsonArray _data = jsonObject['data'].toArray();
 
-    //    qDebug() << _time;
-    //    qDebug() << _type;
-    //    qDebug() << _name;
-    //    qDebug() << _data;
+    qDebug() << _time;
+    qDebug() << _type;
+    qDebug() << _name;
+    qDebug() << _data;
 
-    //    _lev = jsonObject["levitation"].toBool();
-    //    _mag_speed_l = jsonObject["mag_l"].toDouble();
-    //    _mag_speed_r = jsonObject["mag_r"].toDouble();
-    //    _fr_wheel = jsonObject["fr_drive"].toDouble();
-    //    _timeSinceStart = jsonObject["time_since_start"].toInt();
+    if (_name == 0) {
+        _mag_speed_l = _mag_speed_r = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
+        emit magSpeedChangedSignal();
+    } else if (_name == 1) {
+        _fr_wheel = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
+        emit frWheelChangedSignal();
+    } else if (_name == 2) {
+        _lev = _data.at(0).toBool();
+        emit levChangedSignal();
+    } else {
+        qDebug() << "Unknown sensor data";
+    }
+}
 
-    emit levChangedSignal();
-    emit magSpeedRChangedSignal();
-    emit magSpeedLChangedSignal();
-    emit frWheelChangedSignal();
+void Data::average(double x, double y, double z) {
+    return (x+y+z)/3;
 }
 
 int Data::time() {
     return _time;
 }
-
 QString Data::type() {
     return _type;
 }
-
 int Data::name() {
     return _name;
 }
-
 double Data::data() {
     return _data;
 }
-
 double Data::acceleration()
 {
     return _acceleration;
 }
-
 double Data::distance()
 {
     return _distance;
 }
-
 double Data::velocity()
 {
     return _velocity;
 }
-
 int Data::propulsionTemp()
 {
     return _propulsionTemp;
 }
-
 int Data::brakingTemp()
 {
     return _brakingTemp;
 }
-
 int Data::motherboardTemp()
 {
     return _motherboardTemp;
@@ -122,7 +112,6 @@ QString Data::podState()
 {
     return _podState;
 }
-
 bool Data::lev()
 {
     return _lev;

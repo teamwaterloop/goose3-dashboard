@@ -9,47 +9,45 @@ Commands::Commands(WSSClient &client, Logger &log) :
     _client(client),
     _log(log)
 {
-    _hash["magwheel_right"] = 0;
-    _hash["magwheel_left"] = 1;
-    _hash["drivetrain"] = 2;
-    _hash["levitation"] = 3;
+    _hash["mag_speed"] = 0;
+    _hash["fr_drive"] = 1;
+    _hash["levitation"] = 2;
 }
 
 void Commands::levChanged(const QVariant &v) {
-    // _lev = v.toBool();
     qDebug() << "Levitation changed to: "<< v.toString();
     sendCommand("levitation", v);
 }
 
 void Commands::frDriveChanged(const QVariant &v) {
-    //_frdrive_speed = v.toDouble();
     qDebug() << "Friction Drive changed to: "<< v.toString();
-    sendCommand("fr_drive", v.toDouble());
+    sendCommand("fr_drive", v.toDouble()*100);
 }
 
 void Commands::magWheelChanged(const QVariant &v) {
-    //_magwheel_speed = v.toDouble();
     qDebug() << "Mag Wheel Speed changed to: "<< v.toString();
-    sendCommand("mag_speed", v.toDouble());
+    sendCommand("mag_speed", v.toDouble()*100);
 }
 
 
 bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
-    QJsonArray dataArray = {(int)v.toBool(), 0, 0};
+    QJsonArray dataArray = {v.toInt(), 0, 0};
+    qint64 time = QDateTime::currentMSecsSinceEpoch();
     QJsonObject commandObject
     {
-        {"time", QDateTime::currentMSecsSinceEpoch()},
+        {"time", time},
         {"type", "command"},
         {"name", _hash[cmd_type]},
         {"data", dataArray}
     };
+
     QJsonDocument cmd_doc(commandObject);
+    int name = commandObject.value("name").toInt();
 
-    QString text(cmd_doc.toJson());
+    QString text;
+    text.sprintf("%d, %s, %d, %d, %d, %d", time, "command", name, dataArray.at(0).toInt(), dataArray.at(1).toInt(), dataArray.at(2).toInt());
     _log.write(text);
-
-//    qDebug() << sizeof(cmd_doc.toBinaryData());
-//    qDebug() << sizeof(cmd_doc.toJson());
+    qDebug() << text;
 
     return _client.sendMessage(cmd_doc.toJson());
 }

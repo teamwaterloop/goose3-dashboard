@@ -131,6 +131,8 @@ ApplicationWindow {
                     signal magWheelChanged(var val)
                     onValueChanged: magWheelsSlider.magWheelChanged(value)
                     value: 0.0
+                    stepSize: 0.05
+
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -147,6 +149,8 @@ ApplicationWindow {
                     onValueChanged: fricWheelsSlider.fricWheelChanged(value)
                     value: 0.0
                     anchors.horizontalCenter: parent.horizontalCenter
+                    stepSize: 0.05
+
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter

@@ -39,7 +39,9 @@ int main(int argc, char *argv[])
         return -1;
 
     QObject *rootObject = qmlRoot.first();
-    QObject *qmlObject = rootObject->findChild<QObject *>("levSwitch");
+    QObject *levObject = rootObject->findChild<QObject *>("levSwitch");
+    QObject *magObject = rootObject->findChild<QObject *>("magWheelsSlider");
+    QObject *frObject = rootObject->findChild<QObject *>("fricWheelSlider");
 
     // initalizing websocket connection
     QUrl url("ws://localhost:6500/v1/ws");
@@ -47,7 +49,11 @@ int main(int argc, char *argv[])
     wloop::WSSClient wssClient(url, data, log);
     wloop::Commands cmd(wssClient, log);
 
-    QObject::connect(qmlObject, SIGNAL(levitationChanged(QVariant)), &cmd, SLOT(levChanged(QVariant)));
+    QObject::connect(levObject, SIGNAL(levitationChanged(QVariant)), &cmd, SLOT(levChanged(QVariant)));
+    QObject::connect(magObject, SIGNAL(magWheelChanged(QVariant)), &cmd, SLOT(magWheelChanged(QVariant)));
+    QObject::connect(frObject, SIGNAL(fricWheelChanged(QVariant)), &cmd, SLOT(frDriveChanged(QVariant)));
+
+    log.write("Time, Type, Name, Data[0], Data[1], Data[2]");
 
     return app.exec();
 }

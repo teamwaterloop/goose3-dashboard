@@ -6,11 +6,10 @@ namespace wloop {
 
 Logger::Logger(const QString &fileName, const QString &extension,
                const bool showDateTimePerLine, const bool dateTimeInFileName,
-               QObject *parent) : m_showDate(showDateTimePerLine), QObject(parent){
+               QObject *parent) : QObject(parent), m_showDate(showDateTimePerLine) {
     if (dateTimeInFileName) {
         QString path = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0] + "/Github/";
-        //QString path = "/Users/Ash/Documents/Github/";
-        m_fileName = path + fileName + "-" + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")
+        m_fileName = path + fileName + "-" + QDateTime::currentDateTime().toString("dd-MM-yyyy hh.mm.ss")
                 + "." + extension;
         qDebug() << m_fileName;
     } else {
@@ -27,7 +26,6 @@ Logger::Logger(const QString &fileName, const QString &extension,
 }
 
 bool Logger::write(const QString &value) {
-    qDebug() << Q_FUNC_INFO;
     QString text = value;
     if (m_showDate)
         text = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss ") +
@@ -36,7 +34,6 @@ bool Logger::write(const QString &value) {
         text = text + "\n";
     if (-1 == file.write(text.toUtf8()))
     {
-        qDebug() << "false";
         return false;
     }
     else
@@ -45,9 +42,7 @@ bool Logger::write(const QString &value) {
 
 bool Logger::destruct()
 {
-    qDebug() << Q_FUNC_INFO;
     bool x =  file.commit();
-    qDebug() << x;
     return x;
 }
 
