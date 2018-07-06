@@ -72,7 +72,7 @@ private:
     double _mag_speed_r;
     double _fr_wheel;
 
-    void average(double x, double y, double z);
+    double average(double x, double y, double z);
 };
 
 } // namespace wloop

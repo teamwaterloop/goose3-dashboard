@@ -44,10 +44,10 @@ void Data::update(const QString& str)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
 
-    _time = jsonObject.value('time').toInt();
-    _type = jsonObject['type'].toString();
-    _name = jsonObject['name'].toInt();
-    QJsonArray _data = jsonObject['data'].toArray();
+    _time = jsonObject.value("time").toInt();
+    _type = jsonObject.value("type").toString();
+    _name = jsonObject.value("name").toInt();
+    QJsonArray _data = jsonObject.value("data").toArray();
 
     qDebug() << _time;
     qDebug() << _type;
@@ -68,7 +68,7 @@ void Data::update(const QString& str)
     }
 }
 
-void Data::average(double x, double y, double z) {
+double Data::average(double x, double y, double z) {
     return (x+y+z)/3;
 }
 
@@ -81,9 +81,9 @@ QString Data::type() {
 int Data::name() {
     return _name;
 }
-double Data::data() {
-    return _data;
-}
+//double Data::data() {
+//    return _data;
+//}
 double Data::acceleration()
 {
     return _acceleration;

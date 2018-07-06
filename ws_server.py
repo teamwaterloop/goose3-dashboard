@@ -18,10 +18,10 @@ from websocket_server import WebsocketServer as ws
 #    }
 
 msg = {
-    'levitation': 0,
-    'mag_l': 0,
-    'mag_r': 0,
-    'fr_drive' : 0
+    'time': 1502399423,
+    'type': "data",
+    'name': 1,
+    'data' : [45, 44.5, 45.5]
     }
 
 def send_data(client, server):
@@ -40,12 +40,12 @@ def new_client(client, server):
 
 def new_cmd(client, server, message):
     msg_json = json.loads(message)
-    msg['levitation'] = msg_json['levitation']
+    #msg['levitation'] = msg_json['levitation']
     #msg['mag_r'] = msg_json['mag_speed']
     #msg['mag_l'] = msg_json['mag_speed']
     #msg['fr_drive'] = msg_json['fr_speed']
         
-    print(msg_json['levitation'])
+    #print(msg_json['levitation'])
     #print(msg_json['mag_speed'] + "\n")
     #print(msg_json['fr_speed'] + "\n")    
 
