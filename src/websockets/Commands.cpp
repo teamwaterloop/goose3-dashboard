@@ -31,11 +31,9 @@ void Commands::magWheelChanged(const QVariant &v) {
 
 
 bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
-    qDebug() << "Reached the send command fn";
     QJsonArray dataArray = {v.toInt(), 0, 0};
     qint64 time = QDateTime::currentMSecsSinceEpoch();
 
-    qDebug() << "Reached the json creation statement";
     QJsonObject commandObject
     {
         {"time", time},
@@ -49,7 +47,6 @@ bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
 
     QString text;
     text.sprintf("%lld, %s, %d, %d, %d, %d", time, "command", name, dataArray.at(0).toInt(), dataArray.at(1).toInt(), dataArray.at(2).toInt());
-    qDebug() << "Reached the sprintf";
     _log.write(text);
     qDebug() << text;
 
