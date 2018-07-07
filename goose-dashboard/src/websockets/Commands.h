@@ -8,6 +8,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QDebug>
+#include <QHash>
 #include <QObject>
 
 
@@ -33,6 +34,8 @@ private:
     WSSClient &_client;
     Logger &_log;
     //Data &_data;
+
+    QHash<QString, int> _hash;
 
     bool sendCommand(QString cmd_type, const QVariant v);
 

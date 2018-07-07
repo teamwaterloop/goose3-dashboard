@@ -18,9 +18,9 @@
 namespace wloop {
 
 WSSClient::WSSClient(const QUrl &url, Data &data, Logger &log) :
+    _log(log),
     _url(url),
-    _data(data),
-    _log(log)
+    _data(data)
 {
     _socket = new QWebSocket;
 
@@ -32,29 +32,24 @@ WSSClient::WSSClient(const QUrl &url, Data &data, Logger &log) :
 
 void WSSClient::onConnected()
 {
-    qDebug() << Q_FUNC_INFO;
-    _log.write(Q_FUNC_INFO);
+    //qDebug() << Q_FUNC_INFO;
     connect(_socket, &QWebSocket::textMessageReceived, this, &WSSClient::onTextMessageReceived);
 }
 
 bool WSSClient::sendMessage(QByteArray message)
 {
-    qDebug() << message;
-    _log.write(message);
     int bytesSent = _socket->sendTextMessage(message);
     return (bytesSent > 0);
 }
 
 void WSSClient::onTextMessageReceived(QString message)
 {
-    qDebug() << Q_FUNC_INFO;
-    _log.write(Q_FUNC_INFO);
+    //qDebug() << Q_FUNC_INFO;
     _data.update(message);
 }
 
 void WSSClient::close()
 {
-    _log.write(Q_FUNC_INFO);
     _socket->close();
     emit closed();
 }

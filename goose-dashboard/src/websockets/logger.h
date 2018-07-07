@@ -1,4 +1,3 @@
-
 #ifndef LOGGER_H
 #define LOGGER_H
 
@@ -36,3 +35,4 @@ public slots:
 }
 
 #endif // LOGGER_H
+

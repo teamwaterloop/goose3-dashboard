@@ -52,15 +52,15 @@ signals:
     void motherboardTempChangedSignal();
     void podStateChangedSignal();
     void levChangedSignal();
-    void magSpeedLChangedSignal();
-    void magSpeedRChangedSignal();
+    void magSpeedLChangedSignal(QVariant mag_l);
+    void magSpeedRChangedSignal(QVariant mag_r);
     void frWheelChangedSignal();
 
 private:
     int _time;
     QString _type;
     int _name;
-    double _data;
+    //QJsonArray _data;
     double _velocity;
     double _distance;
     double _acceleration;
@@ -68,11 +68,12 @@ private:
     int _brakingTemp;
     int _motherboardTemp;
     QString _podState;
-
     bool _lev;
     double _mag_speed_l;
     double _mag_speed_r;
     double _fr_wheel;
+
+    double average(double x, double y, double z);
 };
 
 } // namespace wloop
