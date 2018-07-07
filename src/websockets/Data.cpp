@@ -14,29 +14,50 @@
 #include <QList>
 #include <QString>
 #include <QObject>
+#include <QDateTime>
+#include <QVariant>
 #include <QtWebSockets/QtWebSockets>
 
 namespace wloop {
 
-Data::Data(QObject *parent) :
-    QObject(parent),
-    _time(0),
-    _type("none"),
-    _name(0),
-//    _data(0),
-    _velocity(0),
-    _distance(0),
-    _acceleration(0),
-    _propulsionTemp(0),
-    _brakingTemp(0),
-    _motherboardTemp(0),
-    _podState("IDLE"),
-    _lev(false),
-    _mag_speed_l(0),
-    _mag_speed_r(0),
-    _fr_wheel(0)
+Data::Data(const QObject *rootObject, Logger *log)
 {
+    _root = rootObject;
+    _log = log;
+    _time = 0;
+    _name = 0;
+    _velocity = 0;
+    _distance = 0;
+    _acceleration = 0;
+    _propulsionTemp = 0;
+    _brakingTemp = 0;
+    _motherboardTemp = 0;
+    _podState = "IDLE";
+    _lev = 0;
+    _mag_speed_l = 0;
+    _mag_speed_r = 0;
+    _fr_wheel = 0;
 }
+
+//Data::Data(QObject *parent) :
+//    QObject(parent),
+//    _time(0),
+//    _type("none"),
+//    _name(0),
+//    _data(0),
+//    _velocity(0),
+//    _distance(0),
+//    _acceleration(0),
+//    _propulsionTemp(0),
+//    _brakingTemp(0),
+//    _motherboardTemp(0),
+//    _podState("IDLE"),
+//    _lev(false),
+//    _mag_speed_l(0),
+//    _mag_speed_r(0),
+//    _fr_wheel(0)
+//{
+//}
 
 void Data::update(const QString& str)
 {
@@ -44,27 +65,52 @@ void Data::update(const QString& str)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
 
-    _time = jsonObject.value("time").toInt();
-    _type = jsonObject.value("type").toString();
-    _name = jsonObject.value("name").toInt();
-    QJsonArray _data = jsonObject.value("data").toArray();
+    _time = QDateTime::currentMSecsSinceEpoch();
+    _type = jsonObject.value("PacketType").toString();
+    _name = jsonObject.value("PacketId").toInt();
+    QJsonArray _data = {jsonObject.value("Data1"), jsonObject.value("Data2"), jsonObject.value("Data3")};
 
     qDebug() << _time;
     qDebug() << _type;
     qDebug() << _name;
     qDebug() << _data;
 
+    QString text;
+    text = QString("%1, %2, %3, %4, %5, %6").arg(_time).arg(_type).arg(_name).arg(_data.at(0).toDouble()).arg(_data.at(1).toDouble()).arg(_data.at(2).toDouble());
+    //text.sprintf("%lld, %s, %d, %d, %d, %d", _time, _type, _name, _data.at(0).toInt(), _data.at(1).toInt(), _data.at(2).toInt());
+    _log->write(text);
+
     if (_name == 0) {
-        _mag_speed_l = _mag_speed_r = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
-        emit magSpeedChangedSignal();
+        //_mag_speed_l = _mag_speed_r = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
+        _mag_speed_l = _mag_speed_r = _data.at(0).toDouble();
+        sendSignals(_mag_speed_r, _mag_speed_l);
     } else if (_name == 1) {
-        _fr_wheel = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
-        emit frWheelChangedSignal();
+        //_fr_wheel = average(_data.at(0).toDouble(), _data.at(1).toDouble(), _data.at(2).toDouble());
+        _fr_wheel = _data.at(0).toDouble();
+        sendSignals(_fr_wheel);
     } else if (_name == 2) {
         _lev = _data.at(0).toBool();
         emit levChangedSignal();
     } else {
         qDebug() << "Unknown sensor data";
+    }
+}
+
+void Data::sendSignals(double magr, double magl)
+{
+    QObject *magGaugeLObject = _root->findChild<QObject *>("leftMagWheelGauge");
+    QObject *magGaugeRObject = _root->findChild<QObject *>("rightMagWheelGauge");
+    if (magGaugeLObject && magGaugeRObject){
+        magGaugeLObject->setProperty("value", magl);
+        magGaugeRObject->setProperty("value", magr);
+    }
+}
+
+void Data::sendSignals(double fric_speed)
+{
+    QObject *frGaugeObject = _root->findChild<QObject *>("fricGauge");
+    if(frGaugeObject) {
+        frGaugeObject->setProperty("value", fric_speed);
     }
 }
 
@@ -128,6 +174,8 @@ double Data::fr_wheel()
 {
     return _fr_wheel;
 }
+
+
 
 
 

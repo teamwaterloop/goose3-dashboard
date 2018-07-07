@@ -41,9 +41,12 @@ ApplicationWindow {
                 CircularGauge {
                     id: leftMagWheelGauge
                     objectName: "leftMagWheelGauge"
-                    value: maglval
+                    value: 0.0
                     anchors.centerIn: parent
-                    property double maglval: 0.0
+                    //property double maglval: 0.0
+                    function maglchanged (speed) {
+                        leftMagWheelGauge.value = speed;
+                    }
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -56,9 +59,12 @@ ApplicationWindow {
                 CircularGauge {
                     id: rightMagWheelGauge
                     objectName: "rightMagWheelGauge"
-                    value: magrval
+                    value: 0.0
                     anchors.centerIn: parent
-                    property double magrval: 0.0
+                    //property double magrval: 0.0
+                    function magrchanged (val) {
+                        rightMagWheelGauge.value = val;
+                    }
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -78,9 +84,9 @@ ApplicationWindow {
             CircularGauge {
                 id: fricGauge
                 objectName: "fricGauge"
-                value: fricval
+                value: 0.0
                 anchors.horizontalCenter: parent.rightMargin
-                property double fricval: 0.0
+                //property double fricval: 0.0
                 x: 100
                 scale: 1
                 enabled: true

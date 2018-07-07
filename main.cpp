@@ -13,6 +13,7 @@
 
 // Qt
 #include <QUrl>
+#include <QVariant>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QIcon>
@@ -43,15 +44,18 @@ int main(int argc, char *argv[])
     QObject *magObject = rootObject->findChild<QObject *>("magWheelsSlider");
     QObject *frObject = rootObject->findChild<QObject *>("fricWheelSlider");
 
+
     // initalizing websocket connection
     QUrl url("ws://localhost:6500/v1/ws");
-    wloop::Data data;
+    wloop::Data data(rootObject, &log);
     wloop::WSSClient wssClient(url, data, log);
     wloop::Commands cmd(wssClient, log);
 
     QObject::connect(levObject, SIGNAL(levitationChanged(QVariant)), &cmd, SLOT(levChanged(QVariant)));
     QObject::connect(magObject, SIGNAL(magWheelChanged(QVariant)), &cmd, SLOT(magWheelChanged(QVariant)));
     QObject::connect(frObject, SIGNAL(fricWheelChanged(QVariant)), &cmd, SLOT(frDriveChanged(QVariant)));
+
+    //QObject::connect(&data, SIGNAL(magSpeedLChangedSignal(QVariant)), magGaugeLObject, SLOT(maglchanged(QVariant)) );
 
     log.write("Time, Type, Name, Data[0], Data[1], Data[2]");
 

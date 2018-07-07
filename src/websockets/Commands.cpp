@@ -37,9 +37,11 @@ bool Commands::sendCommand(const QString cmd_type, const QVariant v) {
     QJsonObject commandObject
     {
         {"time", time},
-        {"type", "command"},
-        {"name", _hash[cmd_type]},
-        {"data", dataArray}
+        {"PacketType", "command"},
+        {"PacketId", _hash[cmd_type]},
+        {"Data1", dataArray.at(0)},
+        {"Data2", dataArray.at(1)},
+        {"Data3", dataArray.at(2)}
     };
 
     QJsonDocument cmd_doc(commandObject);

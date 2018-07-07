@@ -11,6 +11,7 @@
 //Qt
 #include <QString>
 #include <QObject>
+#include "logger.h"
 
 namespace wloop {
 
@@ -19,7 +20,7 @@ class Data : public QObject
     Q_OBJECT
 
 public:
-    Data(QObject* parent = nullptr);
+    explicit Data(const QObject *rootObject, Logger *log);
 
     void update(const QString& message);
 
@@ -52,13 +53,20 @@ signals:
     void motherboardTempChangedSignal();
     void podStateChangedSignal();
     void levChangedSignal();
-    void magSpeedChangedSignal();
+    //void magSpeedLChangedSignal(QVariant mag_l);
+    //void magSpeedRChangedSignal(QVariant mag_r);
     void frWheelChangedSignal();
 
 private:
-    int _time;
+    const QObject *_root;
+    Logger *_log;
+
+    qint64 _time;
     QString _type;
     int _name;
+    double _data1;
+    double _data2;
+    double _data3;
     //QJsonArray _data;
     double _velocity;
     double _distance;
@@ -71,6 +79,9 @@ private:
     double _mag_speed_l;
     double _mag_speed_r;
     double _fr_wheel;
+
+    void sendSignals(double, double);
+    void sendSignals(double);
 
     double average(double x, double y, double z);
 };
