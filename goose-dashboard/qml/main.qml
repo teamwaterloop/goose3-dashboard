@@ -43,7 +43,10 @@ ApplicationWindow {
                     objectName: "leftMagWheelGauge"
                     value: maglval
                     anchors.centerIn: parent
-                    property double maglval: 0.0
+                    //property double maglval: 0.0
+                    function maglchanged (speed) {
+                        leftMagWheelGauge.value = speed;
+                    }
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -58,7 +61,10 @@ ApplicationWindow {
                     objectName: "rightMagWheelGauge"
                     value: magrval
                     anchors.centerIn: parent
-                    property double magrval: 0.0
+                    //property double magrval: 0.0
+                    function magrchanged (val) {
+                        rightMagWheelGauge.value = val;
+                    }
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -131,6 +137,8 @@ ApplicationWindow {
                     signal magWheelChanged(var val)
                     onValueChanged: magWheelsSlider.magWheelChanged(value)
                     value: 0.0
+                    stepSize: 0.05
+
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -147,6 +155,8 @@ ApplicationWindow {
                     onValueChanged: fricWheelsSlider.fricWheelChanged(value)
                     value: 0.0
                     anchors.horizontalCenter: parent.horizontalCenter
+                    stepSize: 0.05
+
                 }
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
