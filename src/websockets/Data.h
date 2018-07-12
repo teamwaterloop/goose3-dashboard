@@ -61,7 +61,8 @@ private:
     const QObject *_root;
     Logger *_log;
 
-    qint64 _time;
+    qint64 _timesinceepoch;
+    int _time;
     QString _type;
     int _name;
     double _data1;

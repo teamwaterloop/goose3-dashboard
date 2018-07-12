@@ -65,19 +65,22 @@ void Data::update(const QString& str)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(str.toUtf8());
     QJsonObject jsonObject = jsonDoc.object();
 
-    _time = QDateTime::currentMSecsSinceEpoch();
-    _type = jsonObject.value("PacketType").toString();
-    _name = jsonObject.value("PacketId").toInt();
-    QJsonArray _data = {jsonObject.value("Data1"), jsonObject.value("Data2"), jsonObject.value("Data3")};
+    _timesinceepoch = QDateTime::currentMSecsSinceEpoch();
+    _time = jsonObject.value("time").toInt();
+    _type = jsonObject.value("type").toString();
+    _name = jsonObject.value("name").toInt();
+    //QJsonArray _data = {jsonObject.value("Data1"), jsonObject.value("Data2"), jsonObject.value("Data3")};
+    QJsonArray _data = jsonObject.value("data").toArray();
 
+    qDebug() << _timesinceepoch;
     qDebug() << _time;
     qDebug() << _type;
     qDebug() << _name;
     qDebug() << _data;
 
     QString text;
-    text = QString("%1, %2, %3, %4, %5, %6").arg(_time).arg(_type).arg(_name).arg(_data.at(0).toDouble()).arg(_data.at(1).toDouble()).arg(_data.at(2).toDouble());
-    //text.sprintf("%lld, %s, %d, %d, %d, %d", _time, _type, _name, _data.at(0).toInt(), _data.at(1).toInt(), _data.at(2).toInt());
+    text = QString("%1, %2, %3, %4, %5, %6, %7").arg(_timesinceepoch).arg(_time).arg(_type).arg(_name).arg(_data.at(0).toDouble());//.arg(_data.at(1).toDouble()).arg(_data.at(2).toDouble());
+    //text.sprintf("%lld, %d, %s, %d, %d, %d, %d", _time, _type, _name, _data.at(0).toInt(), _data.at(1).toInt(), _data.at(2).toInt());
     _log->write(text);
 
     if (_name == 0) {

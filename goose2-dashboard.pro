@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui quick websockets qml
+QT       += core gui quick websockets qml svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

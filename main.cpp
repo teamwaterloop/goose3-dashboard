@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
     //QObject::connect(&data, SIGNAL(magSpeedLChangedSignal(QVariant)), magGaugeLObject, SLOT(maglchanged(QVariant)) );
 
-    log.write("Time, Type, Name, Data[0], Data[1], Data[2]");
+    log.write("Time Since Epoch, Time, Type, Name, Data[0], Data[1], Data[2]");
 
     return app.exec();
 }
